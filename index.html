@@ -1,0 +1,578 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BRBL — 3rdy's Retro Bowl League</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Black+Han+Sans&family=Oswald:wght@400;700&family=Barlow+Condensed:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --gold: #F5C518;
+    --gold2: #FFD700;
+    --red: #D0021B;
+    --dark: #0A0A0A;
+    --navy: #0B1A2E;
+    --cream: #FFF8E7;
+    --grass: #1E7A3C;
+    --grass-light: #27A84F;
+    --white: #FFFFFF;
+  }
+
+  body {
+    background-color: var(--dark);
+    font-family: 'Barlow Condensed', sans-serif;
+    color: var(--cream);
+    overflow-x: hidden;
+    min-height: 100vh;
+  }
+
+  /* ── SCANLINE OVERLAY ── */
+  body::before {
+    content: '';
+    position: fixed; inset: 0;
+    background: repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 2px,
+      rgba(0,0,0,0.08) 2px,
+      rgba(0,0,0,0.08) 4px
+    );
+    pointer-events: none;
+    z-index: 999;
+  }
+
+  /* ── WRAPPER ── */
+  .wrapper {
+    max-width: 680px;
+    margin: 0 auto;
+    padding: 20px 16px 40px;
+  }
+
+  /* ── TICKER ── */
+  .ticker-wrap {
+    background: var(--red);
+    overflow: hidden;
+    padding: 6px 0;
+    border-top: 3px solid var(--gold);
+    border-bottom: 3px solid var(--gold);
+    margin-bottom: 0;
+  }
+  .ticker-inner {
+    display: inline-block;
+    white-space: nowrap;
+    animation: ticker 22s linear infinite;
+  }
+  .ticker-inner span {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1rem;
+    letter-spacing: 0.12em;
+    color: var(--white);
+    padding: 0 24px;
+  }
+  .ticker-inner span::before { content: '🏈 '; }
+  @keyframes ticker {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+  }
+
+  /* ── HERO ── */
+  .hero {
+    background: linear-gradient(160deg, var(--navy) 0%, #030D1A 60%, #0A1A05 100%);
+    border: 3px solid var(--gold);
+    border-top: none;
+    padding: 28px 20px 22px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  /* field lines behind hero */
+  .hero::before {
+    content: '';
+    position: absolute; inset: 0;
+    background:
+      repeating-linear-gradient(
+        90deg,
+        transparent 0px,
+        transparent 58px,
+        rgba(255,255,255,0.03) 58px,
+        rgba(255,255,255,0.03) 60px
+      );
+  }
+  /* end-zone glow */
+  .hero::after {
+    content: '';
+    position: absolute;
+    bottom: -40px; left: 50%;
+    transform: translateX(-50%);
+    width: 340px; height: 200px;
+    background: radial-gradient(ellipse, rgba(30,122,60,0.28) 0%, transparent 70%);
+  }
+
+  .awards-row {
+    display: flex;
+    justify-content: center;
+    gap: 6px;
+    margin-bottom: 12px;
+    position: relative;
+    z-index: 2;
+  }
+  .award-badge {
+    background: var(--gold);
+    color: var(--dark);
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 0.65rem;
+    letter-spacing: 0.1em;
+    padding: 3px 8px;
+    border-radius: 2px;
+  }
+
+  .league-tag {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 0.9rem;
+    letter-spacing: 0.35em;
+    color: var(--gold);
+    position: relative; z-index: 2;
+    margin-bottom: 2px;
+  }
+
+  .hero-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(2.8rem, 10vw, 4.4rem);
+    line-height: 0.9;
+    color: var(--white);
+    position: relative; z-index: 2;
+    text-shadow: 0 0 30px rgba(245,197,24,0.4), 4px 4px 0 rgba(0,0,0,0.6);
+    margin-bottom: 6px;
+  }
+  .hero-title em {
+    color: var(--gold);
+    font-style: normal;
+    display: block;
+    font-size: 0.68em;
+  }
+
+  .era-badge {
+    display: inline-block;
+    background: var(--red);
+    border: 2px solid var(--gold);
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1rem;
+    letter-spacing: 0.25em;
+    color: var(--white);
+    padding: 4px 18px;
+    margin-bottom: 16px;
+    position: relative; z-index: 2;
+    animation: pulse-border 2s ease-in-out infinite;
+  }
+  @keyframes pulse-border {
+    0%,100% { box-shadow: 0 0 0 0 rgba(245,197,24,0.6); }
+    50% { box-shadow: 0 0 0 6px rgba(245,197,24,0); }
+  }
+
+  .sb-callout {
+    background: linear-gradient(135deg, var(--grass) 0%, var(--grass-light) 100%);
+    border: 3px solid var(--gold2);
+    padding: 14px 18px;
+    margin: 0 -4px 14px;
+    position: relative; z-index: 2;
+    animation: glow-green 3s ease-in-out infinite;
+  }
+  @keyframes glow-green {
+    0%,100% { box-shadow: 0 0 0 rgba(39,168,79,0); }
+    50% { box-shadow: 0 0 18px rgba(39,168,79,0.45); }
+  }
+  .sb-callout .sb-label {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 0.75rem;
+    letter-spacing: 0.3em;
+    color: rgba(255,255,255,0.75);
+    display: block;
+    margin-bottom: 2px;
+  }
+  .sb-callout .sb-main {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(1.4rem, 5vw, 2rem);
+    color: var(--white);
+    line-height: 1;
+    text-shadow: 2px 2px 0 rgba(0,0,0,0.5);
+  }
+  .sb-callout .sb-sub {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 0.85rem;
+    font-style: italic;
+    color: rgba(255,255,255,0.85);
+    margin-top: 3px;
+  }
+
+  .hero-vibe {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 1rem;
+    font-style: italic;
+    color: rgba(255,255,255,0.6);
+    position: relative; z-index: 2;
+    letter-spacing: 0.05em;
+  }
+
+  /* ── SEASON OPEN SLOTS ── */
+  .slots-bar {
+    background: var(--gold);
+    color: var(--dark);
+    text-align: center;
+    padding: 10px 16px;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.3rem;
+    letter-spacing: 0.15em;
+    border-left: 3px solid var(--dark);
+    border-right: 3px solid var(--dark);
+    animation: flicker 5s ease-in-out infinite;
+  }
+  @keyframes flicker {
+    0%,97%,100% { opacity: 1; }
+    98% { opacity: 0.7; }
+    99% { opacity: 1; }
+    99.5% { opacity: 0.5; }
+  }
+
+  /* ── SECTION CARD ── */
+  .card {
+    border: 2px solid rgba(245,197,24,0.35);
+    background: rgba(255,255,255,0.03);
+    margin-top: 10px;
+    padding: 16px 18px;
+    position: relative;
+  }
+  .card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 4px; height: 100%;
+    background: var(--gold);
+  }
+
+  .card-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.1rem;
+    letter-spacing: 0.25em;
+    color: var(--gold);
+    margin-bottom: 10px;
+    padding-bottom: 6px;
+    border-bottom: 1px solid rgba(245,197,24,0.25);
+  }
+
+  .two-col {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+  }
+
+  .stat-block {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.08);
+    padding: 10px 12px;
+  }
+  .stat-block .label {
+    font-size: 0.65rem;
+    letter-spacing: 0.2em;
+    color: var(--gold);
+    font-family: 'Bebas Neue', sans-serif;
+    display: block;
+    margin-bottom: 2px;
+  }
+  .stat-block .value {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.1rem;
+    color: var(--white);
+    line-height: 1.1;
+  }
+
+  /* ── LIST ROWS ── */
+  .rule-list { list-style: none; }
+  .rule-list li {
+    padding: 7px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+    font-size: 0.92rem;
+    line-height: 1.35;
+    display: flex;
+    gap: 10px;
+    align-items: flex-start;
+  }
+  .rule-list li:last-child { border-bottom: none; }
+  .rule-list li .icon {
+    flex-shrink: 0;
+    font-size: 1em;
+    margin-top: 1px;
+  }
+  .rule-list li strong { color: var(--gold); }
+  .hl-red { color: #FF5555; font-weight: 700; }
+
+  /* ── HOF ── */
+  .hof-card {
+    background: linear-gradient(135deg, rgba(245,197,24,0.1) 0%, rgba(245,197,24,0.03) 100%);
+    border: 2px solid var(--gold);
+    padding: 16px 18px;
+    margin-top: 10px;
+    text-align: center;
+  }
+  .hof-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.5rem;
+    letter-spacing: 0.3em;
+    color: var(--gold2);
+    text-shadow: 0 0 20px rgba(245,197,24,0.5);
+    margin-bottom: 10px;
+  }
+  .hof-reqs {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 8px;
+  }
+  .hof-req {
+    background: rgba(245,197,24,0.08);
+    border: 1px solid rgba(245,197,24,0.3);
+    padding: 8px;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 0.85rem;
+    letter-spacing: 0.1em;
+    color: var(--cream);
+    line-height: 1.2;
+  }
+  .hof-req span {
+    display: block;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 0.7rem;
+    color: rgba(255,255,255,0.5);
+    letter-spacing: 0.05em;
+    font-style: italic;
+  }
+
+  /* ── CTA ── */
+  .cta-block {
+    background: var(--red);
+    border: 3px solid var(--gold);
+    padding: 22px 20px;
+    text-align: center;
+    margin-top: 10px;
+    position: relative;
+    overflow: hidden;
+  }
+  .cta-block::before {
+    content: '🏈';
+    position: absolute;
+    font-size: 7rem;
+    opacity: 0.07;
+    top: -10px; right: -14px;
+    transform: rotate(20deg);
+  }
+  .cta-headline {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(1.6rem, 6vw, 2.2rem);
+    letter-spacing: 0.1em;
+    color: var(--white);
+    margin-bottom: 4px;
+    line-height: 1;
+  }
+  .cta-sub {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 0.95rem;
+    font-style: italic;
+    color: rgba(255,255,255,0.8);
+    margin-bottom: 16px;
+  }
+  .cta-btn {
+    display: inline-block;
+    background: var(--gold);
+    color: var(--dark);
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.3rem;
+    letter-spacing: 0.2em;
+    padding: 12px 32px;
+    text-decoration: none;
+    border: none;
+    cursor: pointer;
+    transition: transform 0.12s, box-shadow 0.12s;
+    box-shadow: 4px 4px 0 rgba(0,0,0,0.4);
+  }
+  .cta-btn:hover {
+    transform: translate(-2px,-2px);
+    box-shadow: 6px 6px 0 rgba(0,0,0,0.5);
+  }
+  .cta-discord {
+    display: block;
+    margin-top: 10px;
+    font-size: 0.8rem;
+    color: rgba(255,255,255,0.55);
+    font-family: 'Barlow Condensed', sans-serif;
+    letter-spacing: 0.05em;
+    font-style: italic;
+  }
+
+  /* ── FOOTER LOVE ── */
+  .footer-love {
+    text-align: center;
+    margin-top: 14px;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 0.85rem;
+    font-style: italic;
+    color: rgba(255,255,255,0.3);
+    letter-spacing: 0.05em;
+  }
+
+  /* ── DIVIDER ── */
+  .divider {
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--gold), transparent);
+    margin: 10px 0;
+    opacity: 0.4;
+  }
+
+  /* ── DIFF TAG ── */
+  .diff-tag {
+    display: inline-block;
+    background: var(--grass);
+    color: white;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 0.6rem;
+    letter-spacing: 0.2em;
+    padding: 2px 7px;
+    margin-left: 6px;
+    vertical-align: middle;
+  }
+</style>
+</head>
+<body>
+
+<!-- TICKER -->
+<div class="ticker-wrap">
+  <div class="ticker-inner">
+    <span>BRBL SEASON 6 IS HERE</span>
+    <span>SUPER BOWL 6 IN ARGENTINA</span>
+    <span>16–18 SPOTS OPEN</span>
+    <span>5× MEDIA AWARD WINNER</span>
+    <span>BUILD YOUR LEGACY</span>
+    <span>BRBL SEASON 6 IS HERE</span>
+    <span>SUPER BOWL 6 IN ARGENTINA</span>
+    <span>16–18 SPOTS OPEN</span>
+    <span>5× MEDIA AWARD WINNER</span>
+    <span>BUILD YOUR LEGACY</span>
+  </div>
+</div>
+
+<div class="wrapper">
+
+  <!-- HERO -->
+  <div class="hero">
+    <div class="awards-row">
+      <div class="award-badge">🏆 5× Media Award Winner</div>
+      <div class="award-badge">📺 Realism League</div>
+    </div>
+    <div class="league-tag">BRBL Presents</div>
+    <div class="hero-title">
+      3RDY'S RETRO<br>BOWL LEAGUE
+      <em>— NEW ERA —</em>
+    </div>
+    <div class="era-badge">⚡ SEASON 6 — NOW OPEN ⚡</div>
+
+    <!-- SUPER BOWL CALLOUT -->
+    <div class="sb-callout">
+      <span class="sb-label">🌎 International Showdown</span>
+      <div class="sb-main">🏆 SUPER BOWL 6 — BUENOS AIRES, ARGENTINA 🇦🇷</div>
+      <div class="sb-sub">The grandest stage just went global. Will YOU be there?</div>
+    </div>
+
+    <div class="hero-vibe">Media-heavy. Realism-driven. Legacies forged and buried.</div>
+  </div>
+
+  <!-- SLOTS BAR -->
+  <div class="slots-bar">🔥 16–18 TEAMS AVAILABLE — CLAIM YOURS NOW 🔥</div>
+
+  <!-- SEASON SETTINGS -->
+  <div class="card">
+    <div class="card-title">🎮 Season Settings</div>
+    <div class="two-col">
+      <div class="stat-block">
+        <span class="label">Start</span>
+        <div class="value">Year 2 (Roster Optional)</div>
+      </div>
+      <div class="stat-block">
+        <span class="label">Restarts</span>
+        <div class="value">3 (Regular Season)</div>
+      </div>
+      <div class="stat-block">
+        <span class="label">Quarter Length</span>
+        <div class="value">2 Minutes</div>
+      </div>
+      <div class="stat-block">
+        <span class="label">Difficulty</span>
+        <div class="value">Medium</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PLAYOFF SETTINGS -->
+  <div class="card">
+    <div class="card-title">🏆 Playoff Settings <span class="diff-tag">HIGH STAKES</span></div>
+    <ul class="rule-list">
+      <li><span class="icon">🏟️</span><div><strong>CFB-Style Bracket</strong> — No byes. Every team earns it.</div></li>
+      <li><span class="icon">🔁</span><div><strong>1 Restart Only.</strong> Mistakes cost more in January.</div></li>
+      <li><span class="icon">⏱️</span><div><strong>3-Minute Quarters</strong> — More game, more drama.</div></li>
+      <li><span class="icon">💀</span><div><strong>Hard Difficulty</strong> — The best coaches rise. The rest fall.</div></li>
+      <li><span class="icon">⚡</span><div><strong>Upsets ARE possible.</strong> <span class="hl-red">No one is safe.</span></div></li>
+    </ul>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- WHAT MAKES US DIFFERENT -->
+  <div class="card">
+    <div class="card-title">📰 What Makes BRBL Different</div>
+    <ul class="rule-list">
+      <li><span class="icon">🎨</span><div><strong>Custom media & graphics</strong> every other week — your team gets coverage.</div></li>
+      <li><span class="icon">📈</span><div><strong>Coaches build legacies</strong> — or become cautionary tales.</div></li>
+      <li><span class="icon">🔥</span><div><strong>2 bad seasons in a row?</strong> <span class="hl-red">The 3rdy Committee can fire you.</span></div></li>
+      <li><span class="icon">💼</span><div><strong>Fired coaches may find new jobs</strong> — but your rep follows you everywhere.</div></li>
+      <li><span class="icon">🌎</span><div><strong>Real-world coaching culture.</strong> Treat it like a career, or lose one.</div></li>
+    </ul>
+  </div>
+
+  <!-- MEDIA RULES -->
+  <div class="card">
+    <div class="card-title">🚨 Media Rules — This Is a Real League</div>
+    <ul class="rule-list">
+      <li><span class="icon">🩺</span><div><strong>Injuries MUST be announced</strong> publicly. No hiding your roster status.</div></li>
+      <li><span class="icon">🚓</span><div><strong>Off-field incidents MUST be reported.</strong> This is a media league.</div></li>
+      <li><span class="icon">📡</span><div><strong>Narratives matter.</strong> The media will cover YOU — good or bad.</div></li>
+    </ul>
+  </div>
+
+  <!-- HOF -->
+  <div class="hof-card">
+    <div class="hof-title">🏛️ Hall of Fame Requirements</div>
+    <div class="hof-reqs">
+      <div class="hof-req">5 Seasons<span>minimum tenure</span></div>
+      <div class="hof-req">40+ Wins<span>career total</span></div>
+      <div class="hof-req">2 SB Berths<span>get to the game</span></div>
+      <div class="hof-req">1 SB Win<span>close the deal</span></div>
+    </div>
+    <p style="margin-top:10px; font-size:0.75rem; color:rgba(255,255,255,0.4); font-style:italic;">Requirements may increase as the league grows. Get in early.</p>
+  </div>
+
+  <!-- COMMUNITY NOTE -->
+  <div style="text-align:center; margin-top:10px; padding:10px; background:rgba(255,255,255,0.03); border:1px solid rgba(255,255,255,0.07);">
+    <span style="font-family:'Barlow Condensed',sans-serif; font-size:0.95rem; font-style:italic; color:rgba(255,255,255,0.6);">❤️ A loving community — no heavy negativity. Just football, fun, and legacy.</span>
+  </div>
+
+  <!-- CTA -->
+  <div class="cta-block">
+    <div class="cta-headline">Your Coaching Career Starts Now</div>
+    <div class="cta-sub">S4 wrapped up legendary. S5 is filling fast. S6 ends in Argentina. Where will YOU be?</div>
+    <a class="cta-btn" href="https://discord.gg/w8ta9JWNKh" target="_blank">JOIN THE LEAGUE →</a>
+    <span class="cta-discord">discord.gg/w8ta9JWNKh</span>
+  </div>
+
+  <div class="footer-love">© BRBL — 3rdy's Retro Bowl League · New Era · Season 6</div>
+
+</div>
+</body>
+</html>
