@@ -289,9 +289,9 @@ footer{text-align:center;padding:20px;border-top:1px solid var(--border);font-si
     </div>
 
     <div class="tab-row">
-      <button class="tab-btn active" onclick="showTab('s1','standings')">Standings</button>
-      <button class="tab-btn" onclick="showTab('s1','awards')">Awards</button>
-      <button class="tab-btn" onclick="showTab('s1','playoffs')">Playoffs</button>
+      <button class="tab-btn active" onclick="showTab('s1','standings',this)">Standings</button>
+      <button class="tab-btn" onclick="showTab('s1','awards',this)">Awards</button>
+      <button class="tab-btn" onclick="showTab('s1','playoffs',this)">Playoffs</button>
     </div>
 
     <!-- STANDINGS -->
@@ -410,9 +410,9 @@ footer{text-align:center;padding:20px;border-top:1px solid var(--border);font-si
     </div>
 
     <div class="tab-row">
-      <button class="tab-btn active" onclick="showTab('s2','standings')">Standings</button>
-      <button class="tab-btn" onclick="showTab('s2','awards')">Awards</button>
-      <button class="tab-btn" onclick="showTab('s2','playoffs')">Playoffs</button>
+      <button class="tab-btn active" onclick="showTab('s2','standings',this)">Standings</button>
+      <button class="tab-btn" onclick="showTab('s2','awards',this)">Awards</button>
+      <button class="tab-btn" onclick="showTab('s2','playoffs',this)">Playoffs</button>
     </div>
 
     <div id="s2-standings" class="tab-content active">
@@ -555,9 +555,9 @@ footer{text-align:center;padding:20px;border-top:1px solid var(--border);font-si
     </div>
 
     <div class="tab-row">
-      <button class="tab-btn active" onclick="showTab('s3','standings')">Standings</button>
-      <button class="tab-btn" onclick="showTab('s3','awards')">Awards</button>
-      <button class="tab-btn" onclick="showTab('s3','playoffs')">Playoffs</button>
+      <button class="tab-btn active" onclick="showTab('s3','standings',this)">Standings</button>
+      <button class="tab-btn" onclick="showTab('s3','awards',this)">Awards</button>
+      <button class="tab-btn" onclick="showTab('s3','playoffs',this)">Playoffs</button>
     </div>
 
     <div id="s3-standings" class="tab-content active">
@@ -680,10 +680,10 @@ footer{text-align:center;padding:20px;border-top:1px solid var(--border);font-si
     </div>
 
     <div class="tab-row">
-      <button class="tab-btn active" onclick="showTab('s4','standings')">Standings</button>
-      <button class="tab-btn" onclick="showTab('s4','awards')">Awards</button>
-      <button class="tab-btn" onclick="showTab('s4','playoffs')">Playoffs</button>
-      <button class="tab-btn" onclick="showTab('s4','allpro')">All-Pro</button>
+      <button class="tab-btn active" onclick="showTab('s4','standings',this)">Standings</button>
+      <button class="tab-btn" onclick="showTab('s4','awards',this)">Awards</button>
+      <button class="tab-btn" onclick="showTab('s4','playoffs',this)">Playoffs</button>
+      <button class="tab-btn" onclick="showTab('s4','allpro',this)">All-Pro</button>
     </div>
 
     <!-- STANDINGS -->
@@ -922,9 +922,9 @@ footer{text-align:center;padding:20px;border-top:1px solid var(--border);font-si
     </div>
 
     <div class="tab-row">
-      <button class="tab-btn active" onclick="showTab('s5','standings')">Standings</button>
-      <button class="tab-btn" onclick="showTab('s5','awards')">Awards</button>
-      <button class="tab-btn" onclick="showTab('s5','playoffs')">Playoffs</button>
+      <button class="tab-btn active" onclick="showTab('s5','standings',this)">Standings</button>
+      <button class="tab-btn" onclick="showTab('s5','awards',this)">Awards</button>
+      <button class="tab-btn" onclick="showTab('s5','playoffs',this)">Playoffs</button>
     </div>
 
     <!-- STANDINGS -->
@@ -1205,12 +1205,12 @@ footer{text-align:center;padding:20px;border-top:1px solid var(--border);font-si
 <footer>© 3RBL — 3rdy's Retro Bowl League · New Era · Season 6 &nbsp;|&nbsp; ❤️ Loving Community, No Heavy Negativity</footer>
 
 <script>
-function showTab(season, tab) {
+function showTab(season, tab, btn) {
   document.querySelectorAll(`[id^="${season}-"]`).forEach(el => el.classList.remove('active'));
   const card = document.getElementById(season);
   card.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
   document.getElementById(`${season}-${tab}`).classList.add('active');
-  event.target.classList.add('active');
+  btn.classList.add('active');
 }
 
 const sections = document.querySelectorAll('[id]');
@@ -1246,3 +1246,5 @@ window.addEventListener('scroll', () => {
 </script>
 </body>
 </html>
+Close
+Playoffs and Awards Button Not Working - Manus
