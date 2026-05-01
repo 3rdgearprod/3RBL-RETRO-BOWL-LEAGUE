@@ -4,175 +4,162 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>3RBL — 3rdy's Retro Bowl League</title>
-<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Oswald:wght@400;500;600;700&family=Barlow+Condensed:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400;1,600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow+Condensed:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400;1,600&display=swap" rel="stylesheet">
 <style>
-  .side-img {
-  position: fixed;
-  top: 0;
-  height: 100vh;
-  width: 180px;
-  object-fit: cover;
-  z-index: 1;
-  opacity: 0.8;
-}
-
-.left-img {
-  left: 0;
-}
-
-.right-img {
-  right: 0;
-}
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-
 :root{
-  --gold:#F5C518;--gold2:#FFD700;--gold-dim:rgba(245,197,24,0.15);
-  --red:#D0021B;--red2:#FF1A30;
+  --gold:#F5C518;--gold2:#FFD700;--red:#D0021B;--red2:#FF1A30;
   --dark:#080808;--navy:#07111E;--panel:#0E0E0E;--panel2:#141414;
   --grass:#1A6B34;--grass2:#22904A;
-  --white:#FFFFFF;--cream:#FFF8E7;--dim:#888;--dimmer:#444;
-  --border:rgba(245,197,24,0.2);
+  --cream:#FFF8E7;--dim:#888;--dimmer:#444;--border:rgba(245,197,24,0.2);
 }
-
 html{scroll-behavior:smooth}
-body{background:var(--dark);color:var(--cream);font-family:'Barlow Condensed',sans-serif;overflow-x:hidden;cursor:default}
-
-/* SCANLINES */
+body{background:var(--dark);color:var(--cream);font-family:'Barlow Condensed',sans-serif;overflow-x:hidden}
 body::after{content:'';position:fixed;inset:0;background:repeating-linear-gradient(0deg,transparent,transparent 3px,rgba(0,0,0,0.06) 3px,rgba(0,0,0,0.06) 4px);pointer-events:none;z-index:9999}
-
-/* ── TICKER ── */
 .ticker{background:var(--red);border-bottom:2px solid var(--gold);overflow:hidden;padding:7px 0;position:sticky;top:0;z-index:100}
 .ticker-inner{display:inline-flex;white-space:nowrap;animation:tick 28s linear infinite}
 .ticker-inner span{font-family:'Bebas Neue',sans-serif;font-size:.9rem;letter-spacing:.15em;color:#fff;padding:0 28px}
 .ticker-inner span::before{content:'🏈 '}
 @keyframes tick{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
-
-/* ── NAV ── */
-nav{background:rgba(8,8,8,.97);border-bottom:1px solid var(--border);padding:0 20px;display:flex;align-items:center;gap:0;position:sticky;top:35px;z-index:99;backdrop-filter:blur(8px)}
+nav{background:rgba(8,8,8,.97);border-bottom:1px solid var(--border);padding:0 20px;display:flex;align-items:center;position:sticky;top:35px;z-index:99;backdrop-filter:blur(8px)}
 .nav-brand{font-family:'Bebas Neue',sans-serif;font-size:1.3rem;letter-spacing:.2em;color:var(--gold);padding:12px 20px 12px 0;border-right:1px solid var(--border);margin-right:10px;white-space:nowrap}
-.nav-links{display:flex;gap:0;overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none}
+.nav-links{display:flex;overflow-x:auto;scrollbar-width:none}
 .nav-links::-webkit-scrollbar{display:none}
 .nav-links a{font-family:'Bebas Neue',sans-serif;font-size:.85rem;letter-spacing:.15em;color:var(--dim);padding:13px 16px;text-decoration:none;border-bottom:2px solid transparent;white-space:nowrap;transition:color .2s,border-color .2s}
 .nav-links a:hover,.nav-links a.active{color:var(--gold);border-bottom-color:var(--gold)}
-
-/* ── HERO ── */
 .hero{background:linear-gradient(160deg,var(--navy) 0%,#020A12 55%,#071208 100%);padding:60px 20px 50px;text-align:center;position:relative;overflow:hidden;border-bottom:3px solid var(--gold)}
 .hero::before{content:'';position:absolute;inset:0;background:repeating-linear-gradient(90deg,transparent 0,transparent 79px,rgba(255,255,255,.02) 79px,rgba(255,255,255,.02) 80px);pointer-events:none}
 .hero::after{content:'';position:absolute;bottom:-60px;left:50%;transform:translateX(-50%);width:500px;height:250px;background:radial-gradient(ellipse,rgba(30,107,52,.25) 0%,transparent 70%);pointer-events:none}
-
 .hero-badges{display:flex;justify-content:center;flex-wrap:wrap;gap:8px;margin-bottom:20px;position:relative;z-index:2}
 .badge{background:var(--gold);color:var(--dark);font-family:'Bebas Neue',sans-serif;font-size:.65rem;letter-spacing:.15em;padding:4px 10px}
 .badge.outline{background:transparent;color:var(--gold);border:1px solid var(--gold)}
-
 .hero-eyebrow{font-family:'Bebas Neue',sans-serif;font-size:.85rem;letter-spacing:.4em;color:var(--gold);position:relative;z-index:2;margin-bottom:8px}
 .hero-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(3rem,12vw,5.5rem);line-height:.88;color:#fff;text-shadow:0 0 40px rgba(245,197,24,.35),4px 4px 0 rgba(0,0,0,.6);position:relative;z-index:2;margin-bottom:8px}
 .hero-title em{color:var(--gold);font-style:normal;display:block;font-size:.6em}
 .hero-season-badge{display:inline-block;background:var(--red);border:2px solid var(--gold);font-family:'Bebas Neue',sans-serif;font-size:1.1rem;letter-spacing:.2em;color:#fff;padding:5px 22px;margin:14px 0;position:relative;z-index:2;animation:pulse-b 2.5s ease-in-out infinite}
 @keyframes pulse-b{0%,100%{box-shadow:0 0 0 0 rgba(245,197,24,.5)}50%{box-shadow:0 0 0 8px rgba(245,197,24,0)}}
-
 .sb-banner{background:linear-gradient(135deg,var(--grass) 0%,var(--grass2) 100%);border:2px solid var(--gold2);padding:16px 24px;margin:0 auto 16px;max-width:600px;position:relative;z-index:2;animation:glow-g 3s ease-in-out infinite}
 @keyframes glow-g{0%,100%{box-shadow:0 0 0 rgba(34,144,74,0)}50%{box-shadow:0 0 20px rgba(34,144,74,.4)}}
 .sb-banner .sb-label{font-family:'Bebas Neue',sans-serif;font-size:.7rem;letter-spacing:.3em;color:rgba(255,255,255,.7);display:block;margin-bottom:4px}
 .sb-banner .sb-main{font-family:'Bebas Neue',sans-serif;font-size:clamp(1.2rem,4vw,1.8rem);color:#fff;text-shadow:2px 2px 0 rgba(0,0,0,.5)}
 .sb-banner .sb-sub{font-size:.85rem;font-style:italic;color:rgba(255,255,255,.8);margin-top:4px}
 .hero-vibe{font-size:1rem;font-style:italic;color:var(--dim);position:relative;z-index:2}
-
 .slots-bar{background:var(--gold);color:var(--dark);text-align:center;padding:12px;font-family:'Bebas Neue',sans-serif;font-size:1.25rem;letter-spacing:.15em;animation:flicker 6s ease-in-out infinite}
 @keyframes flicker{0%,96%,100%{opacity:1}97%{opacity:.6}98%{opacity:1}99%{opacity:.4}}
-
-/* ── SECTIONS ── */
-.section{max-width:760px;margin:0 auto;padding:40px 16px}
 .section-title{font-family:'Bebas Neue',sans-serif;font-size:2rem;letter-spacing:.2em;color:var(--gold);border-bottom:2px solid var(--border);padding-bottom:10px;margin-bottom:24px;display:flex;align-items:center;gap:12px}
-.section-title span{font-size:.8rem;letter-spacing:.1em;color:var(--dim);font-family:'Barlow Condensed',sans-serif;font-style:italic;font-weight:400}
-
-/* ── CARDS ── */
-.card{background:var(--panel);border:1px solid var(--border);border-left:4px solid var(--gold);padding:20px;margin-bottom:12px;position:relative}
-.card.red-left{border-left-color:var(--red)}
-.card.grass-left{border-left-color:var(--grass2)}
+.section-title span{font-size:.8rem;color:var(--dim);font-family:'Barlow Condensed',sans-serif;font-style:italic;font-weight:400}
+.card{background:var(--panel);border:1px solid var(--border);border-left:4px solid var(--gold);padding:20px;margin-bottom:12px}
+.card.red-left{border-left-color:var(--red)}.card.grass-left{border-left-color:var(--grass2)}
 .card-title{font-family:'Bebas Neue',sans-serif;font-size:1.1rem;letter-spacing:.2em;color:var(--gold);margin-bottom:12px;padding-bottom:8px;border-bottom:1px solid var(--border)}
 .card-title.red{color:var(--red2)}
-
-/* ── SEASON CARDS ── */
 .season-card{background:var(--panel);border:1px solid var(--border);margin-bottom:32px;overflow:hidden}
 .season-header{background:linear-gradient(135deg,var(--navy) 0%,#030D1A 100%);border-bottom:2px solid var(--gold);padding:20px 24px;position:relative;overflow:hidden}
 .season-header::before{content:'';position:absolute;inset:0;background:repeating-linear-gradient(90deg,transparent 0,transparent 59px,rgba(255,255,255,.02) 59px,rgba(255,255,255,.02) 60px)}
 .season-num{font-family:'Bebas Neue',sans-serif;font-size:3rem;color:rgba(245,197,24,.15);position:absolute;right:24px;top:10px;line-height:1;pointer-events:none}
 .season-eyebrow{font-family:'Bebas Neue',sans-serif;font-size:.7rem;letter-spacing:.35em;color:var(--gold);margin-bottom:4px}
 .season-title{font-family:'Bebas Neue',sans-serif;font-size:1.8rem;color:#fff;letter-spacing:.05em;line-height:1}
-.season-champ{display:inline-flex;align-items:center;gap:8px;background:var(--gold);color:var(--dark);font-family:'Bebas Neue',sans-serif;font-size:.9rem;letter-spacing:.1em;padding:5px 14px;margin-top:10px}
-.season-body{padding:0}
+.season-champ{display:inline-flex;align-items:center;background:var(--gold);color:var(--dark);font-family:'Bebas Neue',sans-serif;font-size:.9rem;letter-spacing:.1em;padding:5px 14px;margin-top:10px}
 
-/* ── STANDINGS TABLE ── */
-.conf-block{padding:16px 20px;border-bottom:1px solid var(--border)}
-.conf-block:last-child{border-bottom:none}
+/* ── BANNER IMAGE ZONE ── */
+.season-img-wrap{position:relative;width:100%;height:200px;overflow:hidden;border-bottom:2px solid var(--gold);background:rgba(7,17,30,.6)}
+.s-hero-img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .4s}
+.season-img-wrap:hover .s-hero-img{transform:scale(1.03)}
+.season-img-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(8,8,8,.75) 0%,transparent 55%);pointer-events:none}
+.season-img-caption{position:absolute;bottom:10px;left:16px;font-family:'Bebas Neue',sans-serif;font-size:.68rem;letter-spacing:.2em;color:rgba(255,255,255,.4);pointer-events:none}
+.season-img-placeholder{width:100%;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;cursor:pointer;transition:background .2s;border:2px dashed rgba(245,197,24,.12)}
+.season-img-placeholder:hover{background:rgba(245,197,24,.04)}
+.season-img-placeholder .ph-icon{font-size:2.2rem;opacity:.25}
+.season-img-placeholder .ph-text{font-family:'Bebas Neue',sans-serif;font-size:.68rem;letter-spacing:.2em;color:var(--dimmer)}
+.season-img-edit{position:absolute;top:10px;right:10px;background:rgba(0,0,0,.8);border:1px solid var(--gold);color:var(--gold);font-family:'Bebas Neue',sans-serif;font-size:.6rem;letter-spacing:.12em;padding:5px 10px;cursor:pointer;opacity:0;transition:opacity .2s;z-index:5}
+.season-img-wrap:hover .season-img-edit{opacity:1}
+
+/* ── TABS WITH THUMBNAIL STRIP ── */
+.tab-row{display:flex;border-bottom:1px solid var(--border);overflow-x:auto;scrollbar-width:none;background:rgba(0,0,0,.25)}
+.tab-row::-webkit-scrollbar{display:none}
+.tab-btn{display:flex;flex-direction:column;align-items:center;padding:0;background:none;border:none;border-bottom:2px solid transparent;cursor:pointer;transition:border-color .2s;flex-shrink:0;min-width:80px;overflow:hidden}
+.tab-btn.active,.tab-btn:hover{border-bottom-color:var(--gold)}
+.tab-thumb{width:100%;height:46px;object-fit:cover;display:block;opacity:.5;filter:grayscale(50%);transition:opacity .2s,filter .2s}
+.tab-btn.active .tab-thumb,.tab-btn:hover .tab-thumb{opacity:1;filter:none}
+.tab-thumb-ph{width:100%;height:46px;background:var(--panel2);display:flex;align-items:center;justify-content:center;font-size:1rem;opacity:.35}
+.tab-label{font-family:'Bebas Neue',sans-serif;font-size:.72rem;letter-spacing:.15em;color:var(--dim);padding:6px 12px 7px;transition:color .2s;white-space:nowrap}
+.tab-btn.active .tab-label,.tab-btn:hover .tab-label{color:var(--gold)}
+.tab-add-btn{margin-left:auto;min-width:58px}
+.tab-content{display:none}.tab-content.active{display:block}
+
+/* ── IMAGE MODAL ── */
+.img-modal{display:none;position:fixed;inset:0;background:rgba(0,0,0,.88);z-index:2000;align-items:center;justify-content:center;backdrop-filter:blur(6px)}
+.img-modal.open{display:flex}
+.img-modal-box{background:var(--panel);border:2px solid var(--gold);padding:24px;max-width:440px;width:92%;position:relative}
+.img-modal-title{font-family:'Bebas Neue',sans-serif;font-size:.95rem;letter-spacing:.18em;color:var(--gold);margin-bottom:16px}
+.img-modal-close{position:absolute;top:10px;right:14px;background:none;border:none;color:var(--dim);font-size:1.4rem;cursor:pointer;line-height:1;transition:color .2s}
+.img-modal-close:hover{color:#fff}
+.img-input-lbl{font-family:'Bebas Neue',sans-serif;font-size:.6rem;letter-spacing:.2em;color:var(--dim);display:block;margin-bottom:5px}
+.img-url-input{width:100%;background:var(--panel2);border:1px solid var(--border);color:var(--cream);font-family:'Barlow Condensed',sans-serif;font-size:.9rem;padding:9px 12px;outline:none;transition:border-color .2s;margin-bottom:10px}
+.img-url-input:focus{border-color:var(--gold)}
+.img-url-input::placeholder{color:var(--dimmer);font-style:italic}
+.img-or{text-align:center;color:var(--dimmer);font-family:'Bebas Neue',sans-serif;font-size:.7rem;letter-spacing:.2em;margin:6px 0}
+.img-file-lbl{display:block;background:rgba(245,197,24,.07);border:1px dashed rgba(245,197,24,.25);color:var(--cream);font-family:'Bebas Neue',sans-serif;font-size:.7rem;letter-spacing:.15em;padding:10px 16px;cursor:pointer;transition:background .2s;text-align:center}
+.img-file-lbl:hover{background:rgba(245,197,24,.14)}
+.img-file-input{display:none}
+.img-preview{width:100%;height:88px;object-fit:cover;margin-top:10px;border:1px solid var(--border);display:none}
+.img-preview.show{display:block}
+.img-modal-btns{display:flex;gap:8px;margin-top:14px}
+.img-apply{flex:1;background:var(--gold);color:var(--dark);font-family:'Bebas Neue',sans-serif;font-size:.85rem;letter-spacing:.15em;border:none;padding:11px;cursor:pointer}
+.img-apply:hover{opacity:.85}
+.img-clear{background:var(--panel2);color:var(--dim);font-family:'Bebas Neue',sans-serif;font-size:.85rem;letter-spacing:.12em;border:1px solid var(--border);padding:11px 16px;cursor:pointer}
+.img-clear:hover{color:#fff}
+.img-which-row{display:flex;gap:6px;margin-bottom:12px;flex-wrap:wrap}
+.img-which-btn{background:var(--panel2);border:1px solid var(--border);color:var(--dim);font-family:'Bebas Neue',sans-serif;font-size:.65rem;letter-spacing:.1em;padding:5px 10px;cursor:pointer;transition:all .2s}
+.img-which-btn.sel{background:rgba(245,197,24,.15);border-color:var(--gold);color:var(--gold)}
+
+/* STANDINGS */
+.conf-block{padding:16px 20px;border-bottom:1px solid var(--border)}.conf-block:last-child{border-bottom:none}
 .conf-label{font-family:'Bebas Neue',sans-serif;font-size:.8rem;letter-spacing:.3em;margin-bottom:10px;display:flex;align-items:center;gap:8px}
-.conf-label.moon{color:#82B4FF}
-.conf-label.sun{color:#FFB347}
-.conf-label .conf-icon{font-size:1.1em}
-
+.conf-label.moon{color:#82B4FF}.conf-label.sun{color:#FFB347}
 table.standings{width:100%;border-collapse:collapse;font-size:.88rem}
 table.standings th{font-family:'Bebas Neue',sans-serif;font-size:.7rem;letter-spacing:.2em;color:var(--dim);padding:4px 8px;text-align:left;border-bottom:1px solid var(--border)}
 table.standings th:not(:first-child){text-align:right}
 table.standings td{padding:6px 8px;border-bottom:1px solid rgba(255,255,255,.04)}
 table.standings tr:last-child td{border-bottom:none}
 table.standings td:not(:first-child){text-align:right;color:var(--dim)}
-table.standings td.team{display:flex;align-items:center;gap:8px;font-weight:600;color:var(--cream)}
 table.standings td.record{color:var(--gold);font-weight:600}
-.team-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
-
-/* ── AWARDS GRID ── */
+.tdot{width:8px;height:8px;border-radius:50%;display:inline-block;margin-right:5px;vertical-align:middle;flex-shrink:0}
 .awards-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;padding:16px 20px}
-@media(max-width:480px){.awards-grid{grid-template-columns:1fr}}
+@media(max-width:480px){.awards-grid,.allpro-grid{grid-template-columns:1fr}}
 .award-item{background:var(--panel2);border:1px solid var(--border);padding:12px 14px}
 .award-label{font-family:'Bebas Neue',sans-serif;font-size:.65rem;letter-spacing:.2em;color:var(--gold);display:block;margin-bottom:4px}
 .award-name{font-size:.9rem;font-weight:600;color:#fff;line-height:1.2}
 .award-stat{font-size:.78rem;font-style:italic;color:var(--dim);margin-top:3px;line-height:1.3}
 .award-item.full{grid-column:1/-1}
-
-/* ── ALL PRO GRID ── */
 .allpro-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;padding:16px 20px}
-@media(max-width:480px){.allpro-grid{grid-template-columns:1fr}}
 .allpro-item{background:var(--panel2);border:1px solid rgba(255,255,255,.06);padding:10px 12px;display:flex;align-items:center;gap:10px}
 .allpro-pos{font-family:'Bebas Neue',sans-serif;font-size:.65rem;letter-spacing:.2em;color:var(--gold);width:36px;flex-shrink:0}
-.allpro-info{}
 .allpro-name{font-size:.88rem;font-weight:600;color:#fff;line-height:1.2}
 .allpro-team{font-size:.75rem;font-style:italic;color:var(--dim)}
-
-/* ── PLAYOFF BRACKET ── */
 .playoff-block{padding:16px 20px;border-top:1px solid var(--border)}
 .playoff-title{font-family:'Bebas Neue',sans-serif;font-size:.75rem;letter-spacing:.3em;color:var(--dim);margin-bottom:10px}
 .game-row{display:flex;align-items:center;gap:8px;margin-bottom:6px;font-size:.88rem;flex-wrap:wrap}
 .game-seed{font-family:'Bebas Neue',sans-serif;font-size:.7rem;color:var(--dim);width:20px;flex-shrink:0}
 .game-team{font-weight:600;color:var(--cream)}
 .game-score{font-family:'Bebas Neue',sans-serif;font-size:1rem;color:var(--gold);padding:0 6px}
-.game-score.win{color:#4CAF50}
-.game-row .separator{color:var(--dimmer)}
+.game-score.win{color:#4CAF50}.game-row .sep{color:var(--dimmer)}
 .final-game{background:linear-gradient(135deg,rgba(245,197,24,.08) 0%,transparent 100%);border:1px solid var(--gold);padding:10px 14px;margin-bottom:6px}
 .final-game .game-team{color:var(--gold)}
-
-/* ── SETTINGS CARDS ── */
 .settings-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
 @media(max-width:480px){.settings-grid{grid-template-columns:1fr}}
 .stat-box{background:var(--panel2);border:1px solid rgba(255,255,255,.06);padding:12px 14px}
 .stat-box .slabel{font-family:'Bebas Neue',sans-serif;font-size:.6rem;letter-spacing:.2em;color:var(--gold);display:block;margin-bottom:3px}
 .stat-box .sval{font-size:.95rem;font-weight:600;color:#fff}
-
-/* ── HOF ── */
 .hof-section{background:linear-gradient(135deg,rgba(245,197,24,.06) 0%,transparent 100%);border:2px solid var(--gold);padding:24px;margin-top:32px;text-align:center}
 .hof-title{font-family:'Bebas Neue',sans-serif;font-size:1.8rem;letter-spacing:.25em;color:var(--gold2);text-shadow:0 0 20px rgba(245,197,24,.4);margin-bottom:16px}
 .hof-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:8px;margin-bottom:12px}
 .hof-req{background:rgba(245,197,24,.07);border:1px solid rgba(245,197,24,.25);padding:10px;font-family:'Bebas Neue',sans-serif;font-size:.9rem;letter-spacing:.1em;color:var(--cream)}
 .hof-req small{display:block;font-family:'Barlow Condensed',sans-serif;font-size:.7rem;color:var(--dim);letter-spacing:.05em;font-style:italic;font-weight:400;margin-top:2px}
-
-/* ── RULES ── */
 .rule-list{list-style:none}
 .rule-list li{padding:8px 0;border-bottom:1px solid rgba(255,255,255,.05);font-size:.9rem;display:flex;gap:10px;align-items:flex-start;line-height:1.4}
 .rule-list li:last-child{border-bottom:none}
 .rule-list li .ico{flex-shrink:0;margin-top:1px}
-.rule-list li strong{color:var(--gold)}
-.hl{color:#FF5555;font-weight:700}
-
-/* ── CTA ── */
+.rule-list li strong{color:var(--gold)}.hl{color:#FF5555;font-weight:700}
 .cta-block{background:var(--red);border-top:3px solid var(--gold);border-bottom:3px solid var(--gold);padding:32px 20px;text-align:center;position:relative;overflow:hidden;margin-top:40px}
 .cta-block::before{content:'🏈';position:absolute;font-size:9rem;opacity:.06;top:-10px;right:-20px;transform:rotate(20deg);pointer-events:none}
 .cta-h{font-family:'Bebas Neue',sans-serif;font-size:clamp(1.6rem,5vw,2.4rem);letter-spacing:.08em;color:#fff;margin-bottom:6px}
@@ -180,84 +167,53 @@ table.standings td.record{color:var(--gold);font-weight:600}
 .cta-btn{display:inline-block;background:var(--gold);color:var(--dark);font-family:'Bebas Neue',sans-serif;font-size:1.3rem;letter-spacing:.2em;padding:13px 36px;text-decoration:none;box-shadow:4px 4px 0 rgba(0,0,0,.4);transition:transform .12s,box-shadow .12s}
 .cta-btn:hover{transform:translate(-2px,-2px);box-shadow:6px 6px 0 rgba(0,0,0,.5)}
 .cta-discord{display:block;margin-top:10px;font-size:.8rem;color:rgba(255,255,255,.45);font-style:italic}
-
-/* ── FOOTER ── */
 footer{text-align:center;padding:20px;border-top:1px solid var(--border);font-size:.8rem;font-style:italic;color:var(--dimmer)}
-
-/* ── TABS ── */
-.tab-row{display:flex;border-bottom:1px solid var(--border);overflow-x:auto;scrollbar-width:none}
-.tab-row::-webkit-scrollbar{display:none}
-.tab-btn{font-family:'Bebas Neue',sans-serif;font-size:.8rem;letter-spacing:.18em;color:var(--dim);padding:11px 18px;background:none;border:none;border-bottom:2px solid transparent;cursor:pointer;white-space:nowrap;transition:color .2s,border-color .2s}
-.tab-btn:hover,.tab-btn.active{color:var(--gold);border-bottom-color:var(--gold)}
-.tab-content{display:none}.tab-content.active{display:block}
-
-/* divider */
-.divider{height:1px;background:linear-gradient(90deg,transparent,var(--gold),transparent);opacity:.25;margin:8px 0}
-
-/* record badge */
 .record-badge{font-family:'Bebas Neue',sans-serif;font-size:.75rem;background:var(--gold);color:var(--dark);padding:1px 6px;margin-left:6px}
 .record-badge.champ{background:var(--red);color:#fff}
-
-/* team colors */
-.clr-dal{background:#003B75}
-.clr-phi{background:#004C54}
-.clr-nos{background:#D3BC8D}
-.clr-tb{background:#D50A0A}
-.clr-kc{background:#E31837}
-.clr-car{background:#0085CA}
-.clr-lac{background:#002A5E}
-.clr-ne{background:#002244}
-.clr-lar{background:#003594}
-.clr-det{background:#0076B6}
-.clr-den{background:#FB4F14}
-.clr-arz{background:#97233F}
-.clr-nyg{background:#0B2265}
-.clr-nyj{background:#125740}
-.clr-sf{background:#AA0000}
-.clr-cin{background:#FB4F14}
-.clr-hou{background:#03202F}
-.clr-atl{background:#A71930}
-.clr-ten{background:#4B92DB}
-.clr-jax{background:#006778}
-.clr-chi{background:#0B162A}
-.clr-pit{background:#FFB612}
-
-/* AFK row */
 .afk-row td{opacity:.4;font-style:italic}
-
-/* RESPONSIVE */
-@media(max-width:600px){
-  .hero-title{font-size:clamp(2.5rem,10vw,5rem)}
-  .awards-grid{grid-template-columns:1fr}
-  .allpro-grid{grid-template-columns:1fr}
-  .hof-grid{grid-template-columns:1fr 1fr}
-}
+.dal{background:#003B75}.phi{background:#004C54}.nos{background:#8B7D5B}.tb{background:#D50A0A}
+.kc{background:#E31837}.car{background:#0085CA}.lac{background:#002A5E}.ne{background:#002244}
+.lar{background:#003594}.det{background:#0076B6}.den{background:#FB4F14}.arz{background:#97233F}
+.nyg{background:#0B2265}.nyj{background:#125740}.sf{background:#AA0000}.cin{background:#FB4F14}
+.hou{background:#03202F}.atl{background:#A71930}.ten{background:#4B92DB}.jax{background:#006778}
+.chi{background:#0B162A}.pit{background:#FFB612}
 </style>
 </head>
 <body>
 
-<!-- TICKER -->
-<div class="ticker">
-  <div class="ticker-inner">
-    <span>BRBL SEASON 6 IS HERE</span><span>SUPER BOWL 6 — BUENOS AIRES, ARGENTINA 🇦🇷</span><span>16–18 SPOTS OPEN</span><span>5× MEDIA AWARD WINNER</span><span>EAGLES S1 CHAMPS</span><span>COWBOYS S2 CHAMPS</span><span>49ERS S3 CHAMPS</span><span>PANTHERS S4 CHAMPS</span><span>EAGLES S5 CHAMPS</span><span>BUILD YOUR LEGACY</span>
-    <span>BRBL SEASON 6 IS HERE</span><span>SUPER BOWL 6 — BUENOS AIRES, ARGENTINA 🇦🇷</span><span>16–18 SPOTS OPEN</span><span>5× MEDIA AWARD WINNER</span><span>EAGLES S1 CHAMPS</span><span>COWBOYS S2 CHAMPS</span><span>49ERS S3 CHAMPS</span><span>PANTHERS S4 CHAMPS</span><span>EAGLES S5 CHAMPS</span><span>BUILD YOUR LEGACY</span>
+<!-- IMAGE MODAL -->
+<div class="img-modal" id="imgModal">
+  <div class="img-modal-box">
+    <div class="img-modal-title" id="modalTitle">ADD IMAGE</div>
+    <button class="img-modal-close" onclick="closeModal()">✕</button>
+    <div id="whichRow" class="img-which-row" style="display:none"></div>
+    <label class="img-input-lbl">PASTE AN IMAGE URL</label>
+    <input class="img-url-input" id="imgUrl" type="url" placeholder="https://i.imgur.com/yourimage.jpg" oninput="previewUrl()">
+    <div class="img-or">— OR —</div>
+    <label class="img-file-lbl">📁 UPLOAD FROM YOUR DEVICE
+      <input class="img-file-input" id="imgFile" type="file" accept="image/*" onchange="handleFile(this)">
+    </label>
+    <img class="img-preview" id="imgPrev" alt="preview">
+    <div class="img-modal-btns">
+      <button class="img-apply" onclick="applyImg()">✓ APPLY IMAGE</button>
+      <button class="img-clear" onclick="clearImg()">✕ CLEAR</button>
+    </div>
   </div>
 </div>
+
+<!-- TICKER -->
+<div class="ticker"><div class="ticker-inner">
+  <span>BRBL SEASON 6 IS HERE</span><span>SUPER BOWL 6 — BUENOS AIRES 🇦🇷</span><span>16–18 SPOTS OPEN</span><span>5× MEDIA AWARD WINNER</span><span>S1: EAGLES</span><span>S2: COWBOYS</span><span>S3: 49ERS</span><span>S4: PANTHERS</span><span>S5: EAGLES</span><span>BUILD YOUR LEGACY</span>
+  <span>BRBL SEASON 6 IS HERE</span><span>SUPER BOWL 6 — BUENOS AIRES 🇦🇷</span><span>16–18 SPOTS OPEN</span><span>5× MEDIA AWARD WINNER</span><span>S1: EAGLES</span><span>S2: COWBOYS</span><span>S3: 49ERS</span><span>S4: PANTHERS</span><span>S5: EAGLES</span><span>BUILD YOUR LEGACY</span>
+</div></div>
 
 <!-- NAV -->
 <nav>
   <div class="nav-brand">BRBL</div>
   <div class="nav-links">
-    <a href="#home" class="active">Home</a>
-    <a href="#history">League History</a>
-    <a href="#s1">Season 1</a>
-    <a href="#s2">Season 2</a>
-    <a href="#s3">Season 3</a>
-    <a href="#s4">Season 4</a>
-    <a href="#s5">Season 5</a>
-    <a href="#settings">Settings</a>
-    <a href="#hof">Hall of Fame</a>
-    <a href="#join">Join</a>
+    <a href="#home" class="active">Home</a><a href="#history">History</a>
+    <a href="#s1">S1</a><a href="#s2">S2</a><a href="#s3">S3</a><a href="#s4">S4</a><a href="#s5">S5</a>
+    <a href="#settings">Settings</a><a href="#hof">Hall of Fame</a><a href="#join">Join</a>
   </div>
 </nav>
 
@@ -269,24 +225,17 @@ footer{text-align:center;padding:20px;border-top:1px solid var(--border);font-si
     <div class="badge outline">S1 • S2 • S3 • S4 • S5 Complete</div>
   </div>
   <div class="hero-eyebrow">BRBL Presents</div>
-  <div class="hero-title">
-    3RDY'S RETRO<br>BOWL LEAGUE
-    <em>— NEW ERA —</em>
-  </div>
+  <div class="hero-title">3RDY'S RETRO<br>BOWL LEAGUE<em>— NEW ERA —</em></div>
   <div class="hero-season-badge">⚡ SEASON 6 — NOW OPEN ⚡</div>
-
   <div class="sb-banner">
     <span class="sb-label">🌎 International Showdown</span>
     <div class="sb-main">🏆 SUPER BOWL 6 — BUENOS AIRES, ARGENTINA 🇦🇷</div>
     <div class="sb-sub">The grandest stage just went global. Will YOU be there?</div>
   </div>
-
   <div class="hero-vibe">Media-heavy. Realism-driven. Legacies forged and buried.</div>
 </div>
-
 <div class="slots-bar">🔥 16–18 TEAMS AVAILABLE FOR SEASON 6 — CLAIM YOURS NOW 🔥</div>
 
-<!-- HISTORY NAV -->
 <div style="background:var(--panel);border-bottom:1px solid var(--border)">
   <div style="max-width:760px;margin:0 auto;padding:0 16px">
     <div id="history" style="padding:20px 0 10px">
@@ -295,868 +244,420 @@ footer{text-align:center;padding:20px;border-top:1px solid var(--border);font-si
   </div>
 </div>
 
-<!-- ═══════════════ SEASON 1 ═══════════════ -->
 <div style="max-width:760px;margin:0 auto;padding:16px 16px 0" id="s1">
-  <div class="season-card">
-    <div class="season-header">
-      <div class="season-num">S1</div>
-      <div class="season-eyebrow">3RDY'S RETRO BOWL LEAGUE</div>
-      <div class="season-title">SEASON 1</div>
-      <div class="season-champ">🏆 Philadelphia Eagles — Super Bowl Champions</div>
+<div class="season-card">
+  <div class="season-header">
+    <div class="season-num">S1</div>
+    <div class="season-eyebrow">3RDY'S RETRO BOWL LEAGUE</div>
+    <div class="season-title">SEASON 1</div>
+    <div class="season-champ">🏆 Philadelphia Eagles — Super Bowl Champions</div>
+  </div>
+  <div class="season-img-wrap" id="wrap-s1-banner">
+    <div class="season-img-placeholder" onclick="openModal('s1','banner')">
+      <div class="ph-icon">🖼️</div><div class="ph-text">CLICK TO ADD SEASON 1 BANNER IMAGE</div>
     </div>
-
-    <div class="tab-row">
-      <button class="tab-btn active" onclick="showTab('s1','standings')">Standings</button>
-      <button class="tab-btn" onclick="showTab('s1','awards')">Awards</button>
-      <button class="tab-btn" onclick="showTab('s1','playoffs')">Playoffs</button>
-    </div>
-
-    <!-- STANDINGS -->
-    <div id="s1-standings" class="tab-content active">
-      <div class="conf-block">
-        <div class="conf-label moon"><span class="conf-icon">🌙</span> MOON CONFERENCE</div>
-        <table class="standings">
-          <thead><tr><th>Team</th><th>Record</th><th>Conf</th><th>PF</th></tr></thead>
-          <tbody>
-            <tr><td><div class="team-dot clr-dal"></div><span>Dallas Cowboys</span></td><td class="record">10-3</td><td>5-1</td><td>778</td></tr>
-            <tr><td><div class="team-dot clr-car"></div><span>Carolina Panthers</span></td><td class="record">8-5</td><td>4-4</td><td>599</td></tr>
-            <tr><td><div class="team-dot clr-lac"></div><span>Los Angeles Chargers</span></td><td class="record">7-6</td><td>2-3</td><td>582</td></tr>
-            <tr><td><div class="team-dot clr-lar"></div><span>Los Angeles Rams</span></td><td class="record">5-8</td><td>3-4</td><td>532</td></tr>
-            <tr><td><div class="team-dot clr-det"></div><span>Detroit Lions</span></td><td class="record">4-9</td><td>2-4</td><td>432</td></tr>
-            <tr><td><div class="team-dot clr-ne"></div><span>New England Patriots</span></td><td class="record">2-9-2</td><td>2-6</td><td>415</td></tr>
-          </tbody>
-        </table>
-      </div>
-      <div class="conf-block">
-        <div class="conf-label sun"><span class="conf-icon">☀️</span> SUN CONFERENCE</div>
-        <table class="standings">
-          <thead><tr><th>Team</th><th>Record</th><th>Conf</th><th>PF</th></tr></thead>
-          <tbody>
-            <tr><td><div class="team-dot clr-phi"></div><span>Philadelphia Eagles</span> <span class="record-badge champ">CHAMP</span></td><td class="record">9-4</td><td>5-2</td><td>794</td></tr>
-            <tr><td><div class="team-dot clr-nos"></div><span>New Orleans Saints</span></td><td class="record">8-5</td><td>4-3</td><td>654</td></tr>
-            <tr><td><div class="team-dot clr-tb"></div><span>Tampa Bay Buccaneers</span></td><td class="record">8-5</td><td>4-3</td><td>730</td></tr>
-            <tr><td><div class="team-dot clr-kc"></div><span>Kansas City Chiefs</span></td><td class="record">8-5</td><td>3-3</td><td>758</td></tr>
-            <tr><td><div class="team-dot clr-den"></div><span>Denver Broncos</span></td><td class="record">3-8-2</td><td>2-4</td><td>540</td></tr>
-            <tr><td><div class="team-dot clr-arz"></div><span>Arizona Cardinals</span></td><td class="record">3-10</td><td>2-5</td><td>407</td></tr>
-          </tbody>
-        </table>
-      </div>
-    </div>
-
-    <!-- AWARDS -->
-    <div id="s1-awards" class="tab-content">
-      <div class="awards-grid">
-        <div class="award-item">
-          <span class="award-label">🏈 QB MVP</span>
-          <div class="award-name">Dak Prescott</div>
-          <div class="award-stat">Dallas Cowboys • 104 TD • 0 INT • 6,584 YDS • 82% CMP — UNANIMOUS</div>
-        </div>
-        <div class="award-item">
-          <span class="award-label">🎯 WR MVP</span>
-          <div class="award-name">Rodney Leno Jr.</div>
-          <div class="award-stat">Tampa Bay • 4,141 YDS • 67 TD • 113 REC • 0 FUM — UNANIMOUS</div>
-        </div>
-        <div class="award-item">
-          <span class="award-label">🛡️ Defensive POY</span>
-          <div class="award-name">Mazzi Nall</div>
-          <div class="award-stat">Dallas Cowboys • 105 TCK • 7 INT • 1 SCK • 2 FF</div>
-        </div>
-        <div class="award-item">
-          <span class="award-label">👑 INT King</span>
-          <div class="award-name">Mazzi Nall</div>
-          <div class="award-stat">Dallas Cowboys • 7 INT • 105 TCK • 2 FF — UNANIMOUS</div>
-        </div>
-        <div class="award-item">
-          <span class="award-label">🎙️ Coach of the Year</span>
-          <div class="award-name">サードゆ</div>
-          <div class="award-stat">League founder & top coach</div>
-        </div>
-        <div class="award-item">
-          <span class="award-label">⚡ Mr. Clutch</span>
-          <div class="award-name">cool guy 28</div>
-          <div class="award-stat">Best Story HC Winner</div>
-        </div>
-        <div class="award-item">
-          <span class="award-label">📖 Best Story HC</span>
-          <div class="award-name">cool guy 28</div>
-          <div class="award-stat">—</div>
-        </div>
-        <div class="award-item" style="border-left:3px solid var(--red)">
-          <span class="award-label" style="color:var(--red2)">🤦 Choke of the Year</span>
-          <div class="award-name" style="color:var(--red2)">Los Angeles Rams</div>
-          <div class="award-stat">Also Mr. Trash winner</div>
-        </div>
-      </div>
-    </div>
-
-    <!-- PLAYOFFS -->
-    <div id="s1-playoffs" class="tab-content">
-      <div class="playoff-block">
-        <div class="playoff-title">PRO BOWL</div>
-        <div class="game-row">
-          <span class="game-team">☀️ Sun Conference</span>
-          <span class="game-score">85</span>
-          <span class="separator">—</span>
-          <span class="game-score">98</span>
-          <span class="game-team">🌙 Moon Conference</span>
-        </div>
-      </div>
-      <div class="playoff-block">
-        <div class="playoff-title">SUPER BOWL</div>
-        <div class="final-game game-row">
-          <span class="game-team">🏆 Philadelphia Eagles</span>
-          <span class="game-score win">80</span>
-          <span class="separator">—</span>
-          <span class="game-score">54</span>
-          <span class="game-team">Tampa Bay Buccaneers</span>
-        </div>
-        <div style="font-size:.8rem;font-style:italic;color:var(--dim);margin-top:8px">Philadelphia Eagles are Season 1 Super Bowl Champions!</div>
-      </div>
+    <div class="season-img-overlay"></div>
+    <div class="season-img-caption">SEASON 1</div>
+    <button class="season-img-edit" onclick="openModal('s1','banner')">✏️ EDIT</button>
+  </div>
+  <div class="tab-row" id="tabs-s1">
+    <button class="tab-btn active" onclick="showTab('s1','standings',this)">
+      <div class="tab-thumb-ph" id="th-s1-standings">📊</div><div class="tab-label">Standings</div>
+    </button>
+    <button class="tab-btn" onclick="showTab('s1','awards',this)">
+      <div class="tab-thumb-ph" id="th-s1-awards">🏆</div><div class="tab-label">Awards</div>
+    </button>
+    <button class="tab-btn" onclick="showTab('s1','playoffs',this)">
+      <div class="tab-thumb-ph" id="th-s1-playoffs">🏟️</div><div class="tab-label">Playoffs</div>
+    </button>
+    <button class="tab-btn tab-add-btn" onclick="openModal('s1','tabs')">
+      <div class="tab-thumb-ph">➕</div><div class="tab-label" style="font-size:.58rem">TAB IMGS</div>
+    </button>
+  </div>
+  <div id="s1-standings" class="tab-content active">
+    <div class="conf-block"><div class="conf-label moon">🌙 MOON CONFERENCE</div>
+    <table class="standings"><thead><tr><th>Team</th><th>W-L</th><th>Conf</th><th>PF</th></tr></thead><tbody>
+      <tr><td><span class="tdot dal"></span>Dallas Cowboys</td><td class="record">10-3</td><td>5-1</td><td>778</td></tr>
+      <tr><td><span class="tdot car"></span>Carolina Panthers</td><td class="record">8-5</td><td>4-4</td><td>599</td></tr>
+      <tr><td><span class="tdot lac"></span>LA Chargers</td><td class="record">7-6</td><td>2-3</td><td>582</td></tr>
+      <tr><td><span class="tdot lar"></span>LA Rams</td><td class="record">5-8</td><td>3-4</td><td>532</td></tr>
+      <tr><td><span class="tdot det"></span>Detroit Lions</td><td class="record">4-9</td><td>2-4</td><td>432</td></tr>
+      <tr><td><span class="tdot ne"></span>New England Patriots</td><td class="record">2-9-2</td><td>2-6</td><td>415</td></tr>
+    </tbody></table></div>
+    <div class="conf-block"><div class="conf-label sun">☀️ SUN CONFERENCE</div>
+    <table class="standings"><thead><tr><th>Team</th><th>W-L</th><th>Conf</th><th>PF</th></tr></thead><tbody>
+      <tr><td><span class="tdot phi"></span>Philadelphia Eagles <span class="record-badge champ">CHAMP</span></td><td class="record">9-4</td><td>5-2</td><td>794</td></tr>
+      <tr><td><span class="tdot nos"></span>New Orleans Saints</td><td class="record">8-5</td><td>4-3</td><td>654</td></tr>
+      <tr><td><span class="tdot tb"></span>Tampa Bay Buccaneers</td><td class="record">8-5</td><td>4-3</td><td>730</td></tr>
+      <tr><td><span class="tdot kc"></span>Kansas City Chiefs</td><td class="record">8-5</td><td>3-3</td><td>758</td></tr>
+      <tr><td><span class="tdot den"></span>Denver Broncos</td><td class="record">3-8-2</td><td>2-4</td><td>540</td></tr>
+      <tr><td><span class="tdot arz"></span>Arizona Cardinals</td><td class="record">3-10</td><td>2-5</td><td>407</td></tr>
+    </tbody></table></div>
+  </div>
+  <div id="s1-awards" class="tab-content">
+    <div class="awards-grid">
+      <div class="award-item"><span class="award-label">🏈 QB MVP</span><div class="award-name">Dak Prescott</div><div class="award-stat">Dallas Cowboys • 104 TD • 0 INT • 6,584 YDS • 82% CMP — UNANIMOUS</div></div>
+      <div class="award-item"><span class="award-label">🎯 WR MVP</span><div class="award-name">Rodney Leno Jr.</div><div class="award-stat">Tampa Bay • 4,141 YDS • 67 TD • 113 REC • 0 FUM — UNANIMOUS</div></div>
+      <div class="award-item"><span class="award-label">🛡️ Defensive POY</span><div class="award-name">Mazzi Nall</div><div class="award-stat">Dallas Cowboys • 105 TCK • 7 INT • 1 SCK • 2 FF</div></div>
+      <div class="award-item"><span class="award-label">👑 INT King</span><div class="award-name">Mazzi Nall</div><div class="award-stat">Dallas Cowboys • 7 INT • 105 TCK • 2 FF — UNANIMOUS</div></div>
+      <div class="award-item"><span class="award-label">🎙️ Coach of the Year</span><div class="award-name">サードゆ</div><div class="award-stat">League founder & top coach</div></div>
+      <div class="award-item"><span class="award-label">⚡ Mr. Clutch + 📖 Best Story</span><div class="award-name">cool guy 28</div><div class="award-stat">—</div></div>
+      <div class="award-item" style="border-left:3px solid var(--red)"><span class="award-label" style="color:var(--red2)">🤦 Choke + 🗑️ Mr. Trash</span><div class="award-name" style="color:var(--red2)">Los Angeles Rams</div><div class="award-stat">Both awards</div></div>
     </div>
   </div>
-</div>
+  <div id="s1-playoffs" class="tab-content">
+    <div class="playoff-block"><div class="playoff-title">PRO BOWL</div>
+      <div class="game-row"><span class="game-team">☀️ Sun</span><span class="game-score">85</span><span class="sep">—</span><span class="game-score">98</span><span class="game-team">🌙 Moon</span></div>
+    </div>
+    <div class="playoff-block"><div class="playoff-title">SUPER BOWL I</div>
+      <div class="final-game game-row"><span class="game-team">🏆 Philadelphia Eagles</span><span class="game-score win">80</span><span class="sep">—</span><span class="game-score">54</span><span class="game-team">Tampa Bay Buccaneers</span></div>
+    </div>
+  </div>
+</div></div>
 
-<!-- ═══════════════ SEASON 2 ═══════════════ -->
 <div style="max-width:760px;margin:0 auto;padding:16px 16px 0" id="s2">
-  <div class="season-card">
-    <div class="season-header">
-      <div class="season-num">S2</div>
-      <div class="season-eyebrow">3RDY'S RETRO BOWL LEAGUE</div>
-      <div class="season-title">SEASON 2</div>
-      <div class="season-champ">🏆 Dallas Cowboys — Super Bowl Champions</div>
+<div class="season-card">
+  <div class="season-header">
+    <div class="season-num">S2</div>
+    <div class="season-eyebrow">3RDY'S RETRO BOWL LEAGUE</div>
+    <div class="season-title">SEASON 2</div>
+    <div class="season-champ">🏆 Dallas Cowboys — Super Bowl Champions</div>
+  </div>
+  <div class="season-img-wrap" id="wrap-s2-banner">
+    <div class="season-img-placeholder" onclick="openModal('s2','banner')">
+      <div class="ph-icon">🖼️</div><div class="ph-text">CLICK TO ADD SEASON 2 BANNER IMAGE</div>
     </div>
-
-    <div class="tab-row">
-      <button class="tab-btn active" onclick="showTab('s2','standings')">Standings</button>
-      <button class="tab-btn" onclick="showTab('s2','awards')">Awards</button>
-      <button class="tab-btn" onclick="showTab('s2','playoffs')">Playoffs</button>
-    </div>
-
-    <div id="s2-standings" class="tab-content active">
-      <div class="conf-block">
-        <div class="conf-label moon"><span class="conf-icon">🌙</span> MOON CONFERENCE</div>
-        <table class="standings">
-          <thead><tr><th>Team</th><th>Record</th><th>Conf</th><th>PF</th></tr></thead>
-          <tbody>
-            <tr><td><div class="team-dot clr-dal"></div><span>Dallas Cowboys</span> <span class="record-badge champ">CHAMP</span></td><td class="record">12-0-1</td><td>3-0-1</td><td>798</td></tr>
-            <tr><td><div class="team-dot clr-lar"></div><span>Los Angeles Rams</span></td><td class="record">8-4-1</td><td>2-1-1</td><td>616</td></tr>
-            <tr><td><div class="team-dot clr-car"></div><span>Carolina Panthers</span></td><td class="record">6-7</td><td>1-2</td><td>543</td></tr>
-            <tr><td><div class="team-dot clr-det"></div><span>Detroit Lions</span></td><td class="record">5-8</td><td>1-1</td><td>370</td></tr>
-            <tr><td><div class="team-dot clr-arz"></div><span>Arizona Cardinals</span></td><td class="record">1-11-1</td><td>0-3</td><td>256</td></tr>
-          </tbody>
-        </table>
-      </div>
-      <div class="conf-block">
-        <div class="conf-label sun"><span class="conf-icon">☀️</span> SUN CONFERENCE</div>
-        <table class="standings">
-          <thead><tr><th>Team</th><th>Record</th><th>Conf</th><th>PF</th></tr></thead>
-          <tbody>
-            <tr><td><div class="team-dot clr-nos"></div><span>New Orleans Saints</span></td><td class="record">11-2</td><td>6-0</td><td>708</td></tr>
-            <tr><td><div class="team-dot clr-kc"></div><span>Kansas City Chiefs</span></td><td class="record">8-5</td><td>4-2</td><td>792</td></tr>
-            <tr><td><div class="team-dot clr-tb"></div><span>Tampa Bay Buccaneers</span></td><td class="record">6-7</td><td>2-2</td><td>432</td></tr>
-            <tr><td><div class="team-dot clr-den"></div><span>Denver Broncos</span></td><td class="record">4-9</td><td>1-5</td><td>501</td></tr>
-            <tr><td><div class="team-dot clr-nyg"></div><span>New York Giants</span></td><td class="record">2-10-1</td><td>0-4</td><td>380</td></tr>
-          </tbody>
-        </table>
-      </div>
-    </div>
-
-    <div id="s2-awards" class="tab-content">
-      <div class="awards-grid">
-        <div class="award-item">
-          <span class="award-label">🏈 QB MVP</span>
-          <div class="award-name">EJ Mckitty</div>
-          <div class="award-stat">New Orleans Saints • 8,155 YDS • 130 TD • 1 INT • 96% CMP — UNANIMOUS</div>
-        </div>
-        <div class="award-item">
-          <span class="award-label">🎯 WR MVP</span>
-          <div class="award-name">Rodney Leno Jr.</div>
-          <div class="award-stat">Tampa Bay • 5,818 YDS • 83 TD • 158 REC — UNANIMOUS</div>
-        </div>
-        <div class="award-item">
-          <span class="award-label">🛡️ Defensive POY</span>
-          <div class="award-name">Mazzi Nall</div>
-          <div class="award-stat">Dallas Cowboys • 184 TCK • 4 INT • 5 SCK • 1 FF</div>
-        </div>
-        <div class="award-item">
-          <span class="award-label">👑 INT King</span>
-          <div class="award-name">Charley Floyd</div>
-          <div class="award-stat">LA Rams • 5 INT — UNANIMOUS</div>
-        </div>
-        <div class="award-item">
-          <span class="award-label">🎙️ Coach of the Year</span>
-          <div class="award-name">New Orleans Saints HC</div>
-          <div class="award-stat">Best Story winner too</div>
-        </div>
-        <div class="award-item">
-          <span class="award-label">⚡ Mr. Clutch</span>
-          <div class="award-name">Dallas Cowboys HC</div>
-          <div class="award-stat">—</div>
-        </div>
-        <div class="award-item" style="border-left:3px solid var(--red)">
-          <span class="award-label" style="color:var(--red2)">🤦 Choke of the Year</span>
-          <div class="award-name" style="color:var(--red2)">LA Rams HC</div>
-          <div class="award-stat">Heartbreaking playoff exit</div>
-        </div>
-        <div class="award-item">
-          <span class="award-label">📖 Best Story</span>
-          <div class="award-name">New Orleans Saints HC</div>
-          <div class="award-stat">—</div>
-        </div>
-      </div>
-    </div>
-
-    <div id="s2-playoffs" class="tab-content">
-      <div class="playoff-block">
-        <div class="playoff-title">QUARTERFINALS</div>
-        <div class="game-row">
-          <span class="game-seed">#1</span>
-          <span class="game-team">Dallas Cowboys</span>
-          <span class="game-score win">75</span><span class="separator">—</span><span class="game-score">72</span>
-          <span class="game-team">Carolina Panthers</span>
-          <span class="game-seed">#6</span>
-          <span style="font-size:.75rem;color:var(--gold);font-style:italic">(Auto SB Birth)</span>
-        </div>
-        <div class="game-row">
-          <span class="game-seed">#2</span>
-          <span class="game-team">New Orleans Saints</span>
-          <span class="game-score win">80</span><span class="separator">—</span><span class="game-score">64</span>
-          <span class="game-team">Tampa Bay Buccaneers</span>
-          <span class="game-seed">#5</span>
-        </div>
-        <div class="game-row">
-          <span class="game-seed">#3</span>
-          <span class="game-team">Kansas City Chiefs</span>
-          <span class="game-score win">88</span><span class="separator">—</span><span class="game-score">46</span>
-          <span class="game-team">LA Rams</span>
-          <span class="game-seed">#4</span>
-        </div>
-      </div>
-      <div class="playoff-block">
-        <div class="playoff-title">CONFERENCE CHAMPIONSHIP</div>
-        <div class="game-row">
-          <span class="game-team">New Orleans Saints</span>
-          <span class="game-score win">72</span><span class="separator">—</span><span class="game-score">62</span>
-          <span class="game-team">Kansas City Chiefs</span>
-        </div>
-      </div>
-      <div class="playoff-block">
-        <div class="playoff-title">PRO BOWL</div>
-        <div class="game-row">
-          <span class="game-team">☀️ Sun Conference</span>
-          <span class="game-score win">62</span><span class="separator">—</span><span class="game-score">52</span>
-          <span class="game-team">🌙 Moon Conference</span>
-        </div>
-      </div>
-      <div class="playoff-block">
-        <div class="playoff-title">SUPER BOWL</div>
-        <div class="final-game game-row">
-          <span class="game-team">🏆 Dallas Cowboys</span>
-          <span class="game-score win">87</span><span class="separator">—</span><span class="game-score">70</span>
-          <span class="game-team">New Orleans Saints</span>
-        </div>
-        <div style="font-size:.8rem;font-style:italic;color:var(--dim);margin-top:8px">Dallas Cowboys are Season 2 Super Bowl Champions!</div>
-      </div>
+    <div class="season-img-overlay"></div>
+    <div class="season-img-caption">SEASON 2</div>
+    <button class="season-img-edit" onclick="openModal('s2','banner')">✏️ EDIT</button>
+  </div>
+  <div class="tab-row" id="tabs-s2">
+    <button class="tab-btn active" onclick="showTab('s2','standings',this)"><div class="tab-thumb-ph" id="th-s2-standings">📊</div><div class="tab-label">Standings</div></button>
+    <button class="tab-btn" onclick="showTab('s2','awards',this)"><div class="tab-thumb-ph" id="th-s2-awards">🏆</div><div class="tab-label">Awards</div></button>
+    <button class="tab-btn" onclick="showTab('s2','playoffs',this)"><div class="tab-thumb-ph" id="th-s2-playoffs">🏟️</div><div class="tab-label">Playoffs</div></button>
+    <button class="tab-btn tab-add-btn" onclick="openModal('s2','tabs')"><div class="tab-thumb-ph">➕</div><div class="tab-label" style="font-size:.58rem">TAB IMGS</div></button>
+  </div>
+  <div id="s2-standings" class="tab-content active">
+    <div class="conf-block"><div class="conf-label moon">🌙 MOON CONFERENCE</div>
+    <table class="standings"><thead><tr><th>Team</th><th>W-L</th><th>Conf</th><th>PF</th></tr></thead><tbody>
+      <tr><td><span class="tdot dal"></span>Dallas Cowboys <span class="record-badge champ">CHAMP</span></td><td class="record">12-0-1</td><td>3-0-1</td><td>798</td></tr>
+      <tr><td><span class="tdot lar"></span>LA Rams</td><td class="record">8-4-1</td><td>2-1-1</td><td>616</td></tr>
+      <tr><td><span class="tdot car"></span>Carolina Panthers</td><td class="record">6-7</td><td>1-2</td><td>543</td></tr>
+      <tr><td><span class="tdot det"></span>Detroit Lions</td><td class="record">5-8</td><td>1-1</td><td>370</td></tr>
+      <tr><td><span class="tdot arz"></span>Arizona Cardinals</td><td class="record">1-11-1</td><td>0-3</td><td>256</td></tr>
+    </tbody></table></div>
+    <div class="conf-block"><div class="conf-label sun">☀️ SUN CONFERENCE</div>
+    <table class="standings"><thead><tr><th>Team</th><th>W-L</th><th>Conf</th><th>PF</th></tr></thead><tbody>
+      <tr><td><span class="tdot nos"></span>New Orleans Saints</td><td class="record">11-2</td><td>6-0</td><td>708</td></tr>
+      <tr><td><span class="tdot kc"></span>Kansas City Chiefs</td><td class="record">8-5</td><td>4-2</td><td>792</td></tr>
+      <tr><td><span class="tdot tb"></span>Tampa Bay Buccaneers</td><td class="record">6-7</td><td>2-2</td><td>432</td></tr>
+      <tr><td><span class="tdot den"></span>Denver Broncos</td><td class="record">4-9</td><td>1-5</td><td>501</td></tr>
+      <tr><td><span class="tdot nyg"></span>New York Giants</td><td class="record">2-10-1</td><td>0-4</td><td>380</td></tr>
+    </tbody></table></div>
+  </div>
+  <div id="s2-awards" class="tab-content">
+    <div class="awards-grid">
+      <div class="award-item"><span class="award-label">🏈 QB MVP</span><div class="award-name">EJ Mckitty</div><div class="award-stat">New Orleans Saints • 8,155 YDS • 130 TD • 1 INT • 96% CMP — UNANIMOUS</div></div>
+      <div class="award-item"><span class="award-label">🎯 WR MVP</span><div class="award-name">Rodney Leno Jr.</div><div class="award-stat">Tampa Bay • 5,818 YDS • 83 TD • 158 REC — UNANIMOUS</div></div>
+      <div class="award-item"><span class="award-label">🛡️ Defensive POY</span><div class="award-name">Mazzi Nall</div><div class="award-stat">Dallas Cowboys • 184 TCK • 4 INT • 5 SCK • 1 FF</div></div>
+      <div class="award-item"><span class="award-label">👑 INT King</span><div class="award-name">Charley Floyd</div><div class="award-stat">LA Rams • 5 INT — UNANIMOUS</div></div>
+      <div class="award-item"><span class="award-label">🎙️ COTY + 📖 Best Story</span><div class="award-name">New Orleans Saints HC</div><div class="award-stat">Double award winner</div></div>
+      <div class="award-item"><span class="award-label">⚡ Mr. Clutch</span><div class="award-name">Dallas Cowboys HC</div><div class="award-stat">—</div></div>
+      <div class="award-item" style="border-left:3px solid var(--red)"><span class="award-label" style="color:var(--red2)">🤦 Choke of the Year</span><div class="award-name" style="color:var(--red2)">LA Rams HC</div><div class="award-stat">Heartbreaking playoff exit</div></div>
     </div>
   </div>
-</div>
+  <div id="s2-playoffs" class="tab-content">
+    <div class="playoff-block"><div class="playoff-title">QUARTERFINALS</div>
+      <div class="game-row"><span class="game-seed">#1</span><span class="game-team">Dallas Cowboys</span><span class="game-score win">75</span><span class="sep">—</span><span class="game-score">72</span><span class="game-team">Carolina Panthers</span><span class="game-seed">#6</span><span style="font-size:.73rem;color:var(--gold);font-style:italic">(Auto SB Birth)</span></div>
+      <div class="game-row"><span class="game-seed">#2</span><span class="game-team">New Orleans Saints</span><span class="game-score win">80</span><span class="sep">—</span><span class="game-score">64</span><span class="game-team">Tampa Bay</span><span class="game-seed">#5</span></div>
+      <div class="game-row"><span class="game-seed">#3</span><span class="game-team">Kansas City Chiefs</span><span class="game-score win">88</span><span class="sep">—</span><span class="game-score">46</span><span class="game-team">LA Rams</span><span class="game-seed">#4</span></div>
+    </div>
+    <div class="playoff-block"><div class="playoff-title">CONFERENCE CHAMPIONSHIP</div>
+      <div class="game-row"><span class="game-team">New Orleans Saints</span><span class="game-score win">72</span><span class="sep">—</span><span class="game-score">62</span><span class="game-team">Kansas City Chiefs</span></div>
+    </div>
+    <div class="playoff-block"><div class="playoff-title">PRO BOWL</div>
+      <div class="game-row"><span class="game-team">☀️ Sun</span><span class="game-score win">62</span><span class="sep">—</span><span class="game-score">52</span><span class="game-team">🌙 Moon</span></div>
+    </div>
+    <div class="playoff-block"><div class="playoff-title">SUPER BOWL II</div>
+      <div class="final-game game-row"><span class="game-team">🏆 Dallas Cowboys</span><span class="game-score win">87</span><span class="sep">—</span><span class="game-score">70</span><span class="game-team">New Orleans Saints</span></div>
+    </div>
+  </div>
+</div></div>
 
-<!-- ═══════════════ SEASON 3 ═══════════════ -->
 <div style="max-width:760px;margin:0 auto;padding:16px 16px 0" id="s3">
-  <div class="season-card">
-    <div class="season-header">
-      <div class="season-num">S3</div>
-      <div class="season-eyebrow">3RDY'S RETRO BOWL LEAGUE</div>
-      <div class="season-title">SEASON 3</div>
-      <div class="season-champ">🏆 San Francisco 49ers — Super Bowl Champions</div>
+<div class="season-card">
+  <div class="season-header">
+    <div class="season-num">S3</div>
+    <div class="season-eyebrow">3RDY'S RETRO BOWL LEAGUE</div>
+    <div class="season-title">SEASON 3</div>
+    <div class="season-champ">🏆 San Francisco 49ers — Super Bowl Champions</div>
+  </div>
+  <div class="season-img-wrap" id="wrap-s3-banner">
+    <div class="season-img-placeholder" onclick="openModal('s3','banner')">
+      <div class="ph-icon">🖼️</div><div class="ph-text">CLICK TO ADD SEASON 3 BANNER IMAGE</div>
     </div>
-
-    <div class="tab-row">
-      <button class="tab-btn active" onclick="showTab('s3','standings')">Standings</button>
-      <button class="tab-btn" onclick="showTab('s3','awards')">Awards</button>
-      <button class="tab-btn" onclick="showTab('s3','playoffs')">Playoffs</button>
-    </div>
-
-    <div id="s3-standings" class="tab-content active">
-      <div class="conf-block">
-        <div class="conf-label moon"><span class="conf-icon">🌙</span> MOON CONFERENCE</div>
-        <table class="standings">
-          <thead><tr><th>Team</th><th>Record</th><th>Conf</th><th>PF</th><th></th></tr></thead>
-          <tbody>
-            <tr><td><div class="team-dot clr-dal"></div><span>Dallas Cowboys</span></td><td class="record">10-3</td><td>6-0</td><td>928</td><td style="text-align:right"><span class="record-badge">X</span></td></tr>
-            <tr><td><div class="team-dot clr-car"></div><span>Carolina Panthers</span></td><td class="record">10-3</td><td>3-1</td><td>762</td><td style="text-align:right"><span class="record-badge">X</span></td></tr>
-            <tr><td><div class="team-dot clr-sf"></div><span>San Francisco 49ers</span> <span class="record-badge champ">CHAMP</span></td><td class="record">9-4</td><td>3-2</td><td>866</td><td style="text-align:right"><span class="record-badge">X</span></td></tr>
-            <tr><td><div class="team-dot clr-nyj"></div><span>New York Jets</span></td><td class="record">6-7</td><td>3-3</td><td>567</td><td style="text-align:right"><span class="record-badge">X</span></td></tr>
-            <tr><td><div class="team-dot clr-det"></div><span>Detroit Lions</span></td><td class="record">2-10-1</td><td>0-3-1</td><td>399</td><td style="text-align:right;color:var(--red2)">E</td></tr>
-            <tr><td><div class="team-dot clr-nyg"></div><span>New York Giants</span></td><td class="record">0-12-1</td><td>0-4-1</td><td>0</td><td style="text-align:right;color:var(--red2)">E</td></tr>
-          </tbody>
-        </table>
+    <div class="season-img-overlay"></div>
+    <div class="season-img-caption">SEASON 3 — PARIS GAMES 🇫🇷</div>
+    <button class="season-img-edit" onclick="openModal('s3','banner')">✏️ EDIT</button>
+  </div>
+  <div class="tab-row" id="tabs-s3">
+    <button class="tab-btn active" onclick="showTab('s3','standings',this)"><div class="tab-thumb-ph" id="th-s3-standings">📊</div><div class="tab-label">Standings</div></button>
+    <button class="tab-btn" onclick="showTab('s3','awards',this)"><div class="tab-thumb-ph" id="th-s3-awards">🏆</div><div class="tab-label">Awards</div></button>
+    <button class="tab-btn" onclick="showTab('s3','playoffs',this)"><div class="tab-thumb-ph" id="th-s3-playoffs">🏟️</div><div class="tab-label">Playoffs</div></button>
+    <button class="tab-btn tab-add-btn" onclick="openModal('s3','tabs')"><div class="tab-thumb-ph">➕</div><div class="tab-label" style="font-size:.58rem">TAB IMGS</div></button>
+  </div>
+  <div id="s3-standings" class="tab-content active">
+    <div class="conf-block"><div class="conf-label moon">🌙 MOON CONFERENCE</div>
+    <table class="standings"><thead><tr><th>Team</th><th>W-L</th><th>Conf</th><th>PF</th><th></th></tr></thead><tbody>
+      <tr><td><span class="tdot dal"></span>Dallas Cowboys</td><td class="record">10-3</td><td>6-0</td><td>928</td><td style="text-align:right"><span class="record-badge">X</span></td></tr>
+      <tr><td><span class="tdot car"></span>Carolina Panthers</td><td class="record">10-3</td><td>3-1</td><td>762</td><td style="text-align:right"><span class="record-badge">X</span></td></tr>
+      <tr><td><span class="tdot sf"></span>San Francisco 49ers <span class="record-badge champ">CHAMP</span></td><td class="record">9-4</td><td>3-2</td><td>866</td><td style="text-align:right"><span class="record-badge">X</span></td></tr>
+      <tr><td><span class="tdot nyj"></span>New York Jets</td><td class="record">6-7</td><td>3-3</td><td>567</td><td style="text-align:right"><span class="record-badge">X</span></td></tr>
+      <tr><td><span class="tdot det"></span>Detroit Lions</td><td class="record">2-10-1</td><td>0-3-1</td><td>399</td><td style="text-align:right;color:var(--red2)">E</td></tr>
+      <tr><td><span class="tdot nyg"></span>New York Giants</td><td class="record">0-12-1</td><td>0-4-1</td><td>0</td><td style="text-align:right;color:var(--red2)">E</td></tr>
+    </tbody></table></div>
+    <div class="conf-block"><div class="conf-label sun">☀️ SUN CONFERENCE</div>
+    <table class="standings"><thead><tr><th>Team</th><th>W-L</th><th>Conf</th><th>PF</th><th></th></tr></thead><tbody>
+      <tr><td><span class="tdot tb"></span>Tampa Bay Buccaneers</td><td class="record">12-1</td><td>5-1</td><td>787</td><td style="text-align:right"><span class="record-badge">X</span></td></tr>
+      <tr><td><span class="tdot kc"></span>Kansas City Chiefs</td><td class="record">10-3</td><td>3-1</td><td>842</td><td style="text-align:right"><span class="record-badge">X</span></td></tr>
+      <tr><td><span class="tdot den"></span>Denver Broncos</td><td class="record">8-5</td><td>2-2</td><td>870</td><td style="text-align:right"><span class="record-badge">X</span></td></tr>
+      <tr><td><span class="tdot nos"></span>New Orleans Saints</td><td class="record">6-7</td><td>3-4</td><td>622</td><td style="text-align:right"><span class="record-badge">X</span></td></tr>
+      <tr><td><span class="tdot ne"></span>New England Patriots</td><td class="record">4-9</td><td>2-2</td><td>565</td><td style="text-align:right;color:var(--red2)">E</td></tr>
+      <tr><td><span class="tdot cin"></span>Cincinnati Bengals</td><td class="record">0-13</td><td>0-5</td><td>443</td><td style="text-align:right;color:var(--red2)">E</td></tr>
+    </tbody></table></div>
+  </div>
+  <div id="s3-awards" class="tab-content">
+    <div class="awards-grid">
+      <div class="award-item"><span class="award-label">🏈 QB MVP</span><div class="award-name">Dak Prescott</div><div class="award-stat">Dallas Cowboys • 8,256 YDS • 133 TD • 2 INT</div></div>
+      <div class="award-item"><span class="award-label">🎯 WR MVP</span><div class="award-name">Rodney Leno Jr.</div><div class="award-stat">Tampa Bay • 7,380 YDS • 105 TD • 182 REC — UNANIMOUS</div></div>
+      <div class="award-item"><span class="award-label">🛡️ Defensive POY</span><div class="award-name">Derrick Brown (DL)</div><div class="award-stat">Carolina Panthers • 176 TCK • 10 SCK • 2 FF — UNANIMOUS</div></div>
+      <div class="award-item"><span class="award-label">👑 INT King</span><div class="award-name">Aqib Mafi</div><div class="award-stat">New England Patriots • 8 INT • 0 FF — UNANIMOUS</div></div>
+      <div class="award-item"><span class="award-label">🎙️ COTY</span><div class="award-name">COTY Winner</div><div class="award-stat">UNANIMOUS</div></div>
+      <div class="award-item"><span class="award-label">⚡ Mr. Clutch + 📖 Best Story + 🌟 ROTY</span><div class="award-name">cool guy 28</div><div class="award-stat">Triple award — UNANIMOUS</div></div>
+      <div class="award-item full" style="background:linear-gradient(135deg,rgba(245,197,24,.06) 0%,var(--panel2) 100%);border:1px solid var(--gold)">
+        <span class="award-label" style="color:var(--gold2)">🌍 Game of the Year</span>
+        <div class="award-name">Denver Broncos vs New Orleans Saints</div>
+        <div class="award-stat">Week 2 — PARIS GAMES 🇫🇷 | DEN 74 – 80 NOS | Incredible international stage classic</div>
       </div>
-      <div class="conf-block">
-        <div class="conf-label sun"><span class="conf-icon">☀️</span> SUN CONFERENCE</div>
-        <table class="standings">
-          <thead><tr><th>Team</th><th>Record</th><th>Conf</th><th>PF</th><th></th></tr></thead>
-          <tbody>
-            <tr><td><div class="team-dot clr-tb"></div><span>Tampa Bay Buccaneers</span></td><td class="record">12-1</td><td>5-1</td><td>787</td><td style="text-align:right"><span class="record-badge">X</span></td></tr>
-            <tr><td><div class="team-dot clr-kc"></div><span>Kansas City Chiefs</span></td><td class="record">10-3</td><td>3-1</td><td>842</td><td style="text-align:right"><span class="record-badge">X</span></td></tr>
-            <tr><td><div class="team-dot clr-den"></div><span>Denver Broncos</span></td><td class="record">8-5</td><td>2-2</td><td>870</td><td style="text-align:right"><span class="record-badge">X</span></td></tr>
-            <tr><td><div class="team-dot clr-nos"></div><span>New Orleans Saints</span></td><td class="record">6-7</td><td>3-4</td><td>622</td><td style="text-align:right"><span class="record-badge">X</span></td></tr>
-            <tr><td><div class="team-dot clr-ne"></div><span>New England Patriots</span></td><td class="record">4-9</td><td>2-2</td><td>565</td><td style="text-align:right;color:var(--red2)">E</td></tr>
-            <tr><td><div class="team-dot clr-cin"></div><span>Cincinnati Bengals</span></td><td class="record">0-13</td><td>0-5</td><td>443</td><td style="text-align:right;color:var(--red2)">E</td></tr>
-          </tbody>
-        </table>
-        <div style="margin-top:8px;font-size:.75rem;font-style:italic;color:var(--dim)">X = Playoff qualified &nbsp;|&nbsp; E = Eliminated / Not qualified</div>
-      </div>
-    </div>
-
-    <div id="s3-awards" class="tab-content">
-      <div class="awards-grid">
-        <div class="award-item">
-          <span class="award-label">🏈 QB MVP</span>
-          <div class="award-name">Dak Prescott</div>
-          <div class="award-stat">Dallas Cowboys • 8,256 YDS • 133 TD • 2 INT</div>
-        </div>
-        <div class="award-item">
-          <span class="award-label">🎯 WR MVP</span>
-          <div class="award-name">Rodney Leno Jr.</div>
-          <div class="award-stat">Tampa Bay • 7,380 YDS • 105 TD • 182 REC — UNANIMOUS</div>
-        </div>
-        <div class="award-item">
-          <span class="award-label">🛡️ Defensive POY</span>
-          <div class="award-name">Derrick Brown (DL)</div>
-          <div class="award-stat">Carolina Panthers • 176 TCK • 10 SCK • 2 FF — UNANIMOUS</div>
-        </div>
-        <div class="award-item">
-          <span class="award-label">👑 INT King</span>
-          <div class="award-name">Aqib Mafi</div>
-          <div class="award-stat">New England Patriots • 8 INT • 0 FF — UNANIMOUS</div>
-        </div>
-        <div class="award-item">
-          <span class="award-label">🎙️ Coach of the Year</span>
-          <div class="award-name">COTY Winner</div>
-          <div class="award-stat">Unanimous agreement</div>
-        </div>
-        <div class="award-item">
-          <span class="award-label">⚡ Mr. Clutch</span>
-          <div class="award-name">cool guy 28</div>
-          <div class="award-stat">Best Story & Rookie of the Year — UNANIMOUS</div>
-        </div>
-        <div class="award-item">
-          <span class="award-label">🌟 Rookie of the Year</span>
-          <div class="award-name">cool guy 28</div>
-          <div class="award-stat">UNANIMOUS</div>
-        </div>
-        <div class="award-item full" style="background:linear-gradient(135deg,rgba(245,197,24,.06) 0%,var(--panel2) 100%);border:1px solid var(--gold)">
-          <span class="award-label" style="color:var(--gold2)">🌍 Game of the Year</span>
-          <div class="award-name">Denver Broncos vs New Orleans Saints</div>
-          <div class="award-stat">Week 2 — PARIS GAMES 🇫🇷 &nbsp;|&nbsp; DEN 74 – 80 NOS &nbsp;|&nbsp; Incredible back-and-forth game on the international stage</div>
-        </div>
-        <div class="award-item" style="border-left:3px solid var(--red)">
-          <span class="award-label" style="color:var(--red2)">🤦 Choke of the Year</span>
-          <div class="award-name" style="color:var(--red2)">Season 3 HC</div>
-          <div class="award-stat">—</div>
-        </div>
-        <div class="award-item" style="border-left:3px solid var(--red)">
-          <span class="award-label" style="color:var(--red2)">🗑️ Mr. Trash</span>
-          <div class="award-name" style="color:var(--red2)">Season 3 HC</div>
-          <div class="award-stat">UNANIMOUS</div>
-        </div>
-      </div>
-    </div>
-
-    <div id="s3-playoffs" class="tab-content">
-      <div class="playoff-block">
-        <div class="playoff-title">PRO BOWL</div>
-        <div class="game-row">
-          <span class="game-team">☀️ Sun Conference</span>
-          <span class="game-score">54</span><span class="separator">—</span><span class="game-score win">67</span>
-          <span class="game-team">🌙 Moon Conference</span>
-        </div>
-      </div>
-      <div class="playoff-block">
-        <div class="playoff-title">SUPER BOWL</div>
-        <div class="final-game game-row">
-          <span class="game-team">🏆 San Francisco 49ers</span>
-          <span class="game-score win">64</span><span class="separator">—</span><span class="game-score">60</span>
-          <span class="game-team">Tampa Bay Buccaneers</span>
-        </div>
-        <div style="font-size:.8rem;font-style:italic;color:var(--dim);margin-top:8px">San Francisco 49ers are Season 3 Super Bowl Champions! 4-point thriller!</div>
-      </div>
+      <div class="award-item" style="border-left:3px solid var(--red)"><span class="award-label" style="color:var(--red2)">🤦 Choke + 🗑️ Mr. Trash</span><div class="award-name" style="color:var(--red2)">Season 3 HC</div><div class="award-stat">Both — UNANIMOUS</div></div>
     </div>
   </div>
-</div>
+  <div id="s3-playoffs" class="tab-content">
+    <div class="playoff-block"><div class="playoff-title">PRO BOWL</div>
+      <div class="game-row"><span class="game-team">☀️ Sun</span><span class="game-score">54</span><span class="sep">—</span><span class="game-score win">67</span><span class="game-team">🌙 Moon</span></div>
+    </div>
+    <div class="playoff-block"><div class="playoff-title">SUPER BOWL III</div>
+      <div class="final-game game-row"><span class="game-team">🏆 San Francisco 49ers</span><span class="game-score win">64</span><span class="sep">—</span><span class="game-score">60</span><span class="game-team">Tampa Bay Buccaneers</span></div>
+      <div style="font-size:.8rem;font-style:italic;color:var(--dim);margin-top:8px">4-point thriller!</div>
+    </div>
+  </div>
+</div></div>
 
-<!-- ═══════════════ SEASON 4 ═══════════════ -->
 <div style="max-width:760px;margin:0 auto;padding:16px 16px 0" id="s4">
-  <div class="season-card">
-    <div class="season-header">
-      <div class="season-num">S4</div>
-      <div class="season-eyebrow">3RDY'S RETRO BOWL LEAGUE</div>
-      <div class="season-title">SEASON 4</div>
-      <div class="season-champ">🏆 Carolina Panthers — Super Bowl Champions</div>
+<div class="season-card">
+  <div class="season-header">
+    <div class="season-num">S4</div>
+    <div class="season-eyebrow">3RDY'S RETRO BOWL LEAGUE</div>
+    <div class="season-title">SEASON 4</div>
+    <div class="season-champ">🏆 Carolina Panthers — Super Bowl Champions</div>
+  </div>
+  <div class="season-img-wrap" id="wrap-s4-banner">
+    <div class="season-img-placeholder" onclick="openModal('s4','banner')">
+      <div class="ph-icon">🖼️</div><div class="ph-text">CLICK TO ADD SEASON 4 BANNER IMAGE</div>
     </div>
-
-    <div class="tab-row">
-      <button class="tab-btn active" onclick="showTab('s4','standings')">Standings</button>
-      <button class="tab-btn" onclick="showTab('s4','awards')">Awards</button>
-      <button class="tab-btn" onclick="showTab('s4','playoffs')">Playoffs</button>
-      <button class="tab-btn" onclick="showTab('s4','allpro')">All-Pro</button>
-    </div>
-
-    <!-- STANDINGS -->
-    <div id="s4-standings" class="tab-content active">
-      <div class="conf-block">
-        <div class="conf-label moon"><span class="conf-icon">🌙</span> MOON CONFERENCE</div>
-        <table class="standings">
-          <thead><tr><th>Team</th><th>Record</th><th>Conf</th><th>PPGA</th><th>PF</th><th></th></tr></thead>
-          <tbody>
-            <tr><td><div class="team-dot clr-phi"></div><span>Philadelphia Eagles</span></td><td class="record">11-2</td><td>3-1</td><td>68.0</td><td>886</td><td style="text-align:right"><span class="record-badge">X</span></td></tr>
-            <tr><td><div class="team-dot clr-car"></div><span>Carolina Panthers</span> <span class="record-badge champ">CHAMP</span></td><td class="record">10-3</td><td>5-0</td><td>70.5</td><td>678</td><td style="text-align:right"><span class="record-badge">X</span></td></tr>
-            <tr><td><div class="team-dot clr-sf"></div><span>San Francisco 49ers</span></td><td class="record">9-4</td><td>3-2</td><td>61.0</td><td>824</td><td style="text-align:right"><span class="record-badge">X</span></td></tr>
-            <tr><td><div class="team-dot clr-nyg"></div><span>New York Giants</span></td><td class="record">6-7</td><td>2-4</td><td>59.5</td><td>788</td><td style="text-align:right"><span class="record-badge">X</span></td></tr>
-            <tr><td><div class="team-dot clr-dal"></div><span>Dallas Cowboys</span></td><td class="record">6-7</td><td>2-4</td><td>65.5</td><td>838</td><td style="text-align:right"><span class="record-badge">X</span></td></tr>
-            <tr><td><div class="team-dot clr-ne"></div><span>New England Patriots</span></td><td class="record">4-9</td><td>1-5</td><td>54.0</td><td>475</td><td style="text-align:right;color:var(--red2)">E</td></tr>
-            <tr><td><div class="team-dot clr-nyj"></div><span>New York Jets</span></td><td class="record">1-12</td><td>1-4</td><td>49.5</td><td>589</td><td style="text-align:right;color:var(--red2)">E</td></tr>
-          </tbody>
-        </table>
+    <div class="season-img-overlay"></div>
+    <div class="season-img-caption">SEASON 4</div>
+    <button class="season-img-edit" onclick="openModal('s4','banner')">✏️ EDIT</button>
+  </div>
+  <div class="tab-row" id="tabs-s4">
+    <button class="tab-btn active" onclick="showTab('s4','standings',this)"><div class="tab-thumb-ph" id="th-s4-standings">📊</div><div class="tab-label">Standings</div></button>
+    <button class="tab-btn" onclick="showTab('s4','awards',this)"><div class="tab-thumb-ph" id="th-s4-awards">🏆</div><div class="tab-label">Awards</div></button>
+    <button class="tab-btn" onclick="showTab('s4','playoffs',this)"><div class="tab-thumb-ph" id="th-s4-playoffs">🏟️</div><div class="tab-label">Playoffs</div></button>
+    <button class="tab-btn" onclick="showTab('s4','allpro',this)"><div class="tab-thumb-ph" id="th-s4-allpro">⭐</div><div class="tab-label">All-Pro</div></button>
+    <button class="tab-btn tab-add-btn" onclick="openModal('s4','tabs')"><div class="tab-thumb-ph">➕</div><div class="tab-label" style="font-size:.58rem">TAB IMGS</div></button>
+  </div>
+  <div id="s4-standings" class="tab-content active">
+    <div class="conf-block"><div class="conf-label moon">🌙 MOON CONFERENCE</div>
+    <table class="standings"><thead><tr><th>Team</th><th>W-L</th><th>Conf</th><th>PPGA</th><th>PF</th><th></th></tr></thead><tbody>
+      <tr><td><span class="tdot phi"></span>Philadelphia Eagles</td><td class="record">11-2</td><td>3-1</td><td>68.0</td><td>886</td><td style="text-align:right"><span class="record-badge">X</span></td></tr>
+      <tr><td><span class="tdot car"></span>Carolina Panthers <span class="record-badge champ">CHAMP</span></td><td class="record">10-3</td><td>5-0</td><td>70.5</td><td>678</td><td style="text-align:right"><span class="record-badge">X</span></td></tr>
+      <tr><td><span class="tdot sf"></span>San Francisco 49ers</td><td class="record">9-4</td><td>3-2</td><td>61.0</td><td>824</td><td style="text-align:right"><span class="record-badge">X</span></td></tr>
+      <tr><td><span class="tdot nyg"></span>New York Giants</td><td class="record">6-7</td><td>2-4</td><td>59.5</td><td>788</td><td style="text-align:right"><span class="record-badge">X</span></td></tr>
+      <tr><td><span class="tdot dal"></span>Dallas Cowboys</td><td class="record">6-7</td><td>2-4</td><td>65.5</td><td>838</td><td style="text-align:right"><span class="record-badge">X</span></td></tr>
+      <tr><td><span class="tdot ne"></span>New England Patriots</td><td class="record">4-9</td><td>1-5</td><td>54.0</td><td>475</td><td style="text-align:right;color:var(--red2)">E</td></tr>
+      <tr><td><span class="tdot nyj"></span>New York Jets</td><td class="record">1-12</td><td>1-4</td><td>49.5</td><td>589</td><td style="text-align:right;color:var(--red2)">E</td></tr>
+    </tbody></table></div>
+    <div class="conf-block"><div class="conf-label sun">☀️ SUN CONFERENCE</div>
+    <table class="standings"><thead><tr><th>Team</th><th>W-L</th><th>Conf</th><th>PPGA</th><th>PF</th><th></th></tr></thead><tbody>
+      <tr><td><span class="tdot tb"></span>Tampa Bay Buccaneers</td><td class="record">12-1</td><td>5-0</td><td>67.75</td><td>853</td><td style="text-align:right"><span class="record-badge">X</span></td></tr>
+      <tr><td><span class="tdot kc"></span>Kansas City Chiefs</td><td class="record">10-3</td><td>3-1</td><td>70.5</td><td>852</td><td style="text-align:right"><span class="record-badge">X</span></td></tr>
+      <tr><td><span class="tdot den"></span>Denver Broncos</td><td class="record">10-3</td><td>2-1</td><td>68.25</td><td>852</td><td style="text-align:right"><span class="record-badge">X</span></td></tr>
+      <tr><td><span class="tdot hou"></span>Houston Texans</td><td class="record">6-7</td><td>2-4</td><td>50.24</td><td>666</td><td style="text-align:right;color:var(--red2)">E</td></tr>
+      <tr><td><span class="tdot cin"></span>Cincinnati Bengals</td><td class="record">3-10</td><td>2-4</td><td>44.5</td><td>643</td><td style="text-align:right;color:var(--red2)">E</td></tr>
+      <tr><td><span class="tdot atl"></span>Atlanta Falcons</td><td class="record">3-10</td><td>1-3</td><td>45.5</td><td>446</td><td style="text-align:right;color:var(--red2)">E</td></tr>
+      <tr><td><span class="tdot nos"></span>New Orleans Saints</td><td class="record">3-10</td><td>0-3</td><td>56.0</td><td>574</td><td style="text-align:right;color:var(--red2)">E</td></tr>
+    </tbody></table></div>
+  </div>
+  <div id="s4-awards" class="tab-content">
+    <div class="awards-grid">
+      <div class="award-item full" style="background:linear-gradient(135deg,rgba(245,197,24,.06) 0%,var(--panel2) 100%);border:1px solid var(--gold)">
+        <span class="award-label" style="color:var(--gold2)">🌍 Game of the Year</span>
+        <div class="award-name">Philadelphia Eagles vs New York Giants</div>
+        <div class="award-stat">Week 1 | PHI 80 – 78 NYG | Instant classic to open the season</div>
       </div>
-      <div class="conf-block">
-        <div class="conf-label sun"><span class="conf-icon">☀️</span> SUN CONFERENCE</div>
-        <table class="standings">
-          <thead><tr><th>Team</th><th>Record</th><th>Conf</th><th>PPGA</th><th>PF</th><th></th></tr></thead>
-          <tbody>
-            <tr><td><div class="team-dot clr-tb"></div><span>Tampa Bay Buccaneers</span></td><td class="record">12-1</td><td>5-0</td><td>67.75</td><td>853</td><td style="text-align:right"><span class="record-badge">X</span></td></tr>
-            <tr><td><div class="team-dot clr-kc"></div><span>Kansas City Chiefs</span></td><td class="record">10-3</td><td>3-1</td><td>70.5</td><td>852</td><td style="text-align:right"><span class="record-badge">X</span></td></tr>
-            <tr><td><div class="team-dot clr-den"></div><span>Denver Broncos</span></td><td class="record">10-3</td><td>2-1</td><td>68.25</td><td>852</td><td style="text-align:right"><span class="record-badge">X</span></td></tr>
-            <tr><td><div class="team-dot clr-hou"></div><span>Houston Texans</span></td><td class="record">6-7</td><td>2-4</td><td>50.24</td><td>666</td><td style="text-align:right;color:var(--red2)">E</td></tr>
-            <tr><td><div class="team-dot clr-cin"></div><span>Cincinnati Bengals</span></td><td class="record">3-10</td><td>2-4</td><td>44.5</td><td>643</td><td style="text-align:right;color:var(--red2)">E</td></tr>
-            <tr><td><div class="team-dot clr-atl"></div><span>Atlanta Falcons</span></td><td class="record">3-10</td><td>1-3</td><td>45.5</td><td>446</td><td style="text-align:right;color:var(--red2)">E</td></tr>
-            <tr><td><div class="team-dot clr-nos"></div><span>New Orleans Saints</span></td><td class="record">3-10</td><td>0-3</td><td>56.0</td><td>574</td><td style="text-align:right;color:var(--red2)">E</td></tr>
-          </tbody>
-        </table>
-        <div style="margin-top:8px;font-size:.75rem;font-style:italic;color:var(--dim)">X = Playoff qualified &nbsp;|&nbsp; E = Eliminated</div>
-      </div>
-    </div>
-
-    <!-- AWARDS -->
-    <div id="s4-awards" class="tab-content">
-      <div class="awards-grid">
-        <div class="award-item full" style="background:linear-gradient(135deg,rgba(245,197,24,.06) 0%,var(--panel2) 100%);border:1px solid var(--gold)">
-          <span class="award-label" style="color:var(--gold2)">🌍 Game of the Year</span>
-          <div class="award-name">Philadelphia Eagles vs New York Giants</div>
-          <div class="award-stat">Week 1 &nbsp;|&nbsp; PHI 80 – 78 NYG &nbsp;|&nbsp; Instant classic to open the season</div>
-        </div>
-        <div class="award-item">
-          <span class="award-label">🏈 QB MVP</span>
-          <div class="award-name">Marquis Pratt</div>
-          <div class="award-stat">Denver Broncos • 6,833 YDS • 109 TD • 0 INT • 65% CMP (205/134) — UNANIMOUS</div>
-        </div>
-        <div class="award-item">
-          <span class="award-label">🎯 WR MVP</span>
-          <div class="award-name">Ryan Flournoy</div>
-          <div class="award-stat">Dallas Cowboys • 4,555 YDS • 74 TD • 0 FUM — UNANIMOUS</div>
-        </div>
-        <div class="award-item">
-          <span class="award-label">🛡️ Defensive POY</span>
-          <div class="award-name">Brian Burns (LB)</div>
-          <div class="award-stat">New York Giants • 102 TCK • 4 INT • 4 SCK • 1 FF</div>
-        </div>
-        <div class="award-item">
-          <span class="award-label">👑 INT King</span>
-          <div class="award-name">Jerick Tauaefa</div>
-          <div class="award-stat">Houston Texans • 7 INT • 1 FF</div>
-        </div>
-        <div class="award-item">
-          <span class="award-label">🎙️ Coach of the Year</span>
-          <div class="award-name">COTY Winner</div>
-          <div class="award-stat">UNANIMOUS AGREEMENT</div>
-        </div>
-        <div class="award-item">
-          <span class="award-label">⚡ Mr. Clutch</span>
-          <div class="award-name">Mr. Clutch Winner</div>
-          <div class="award-stat">Also: Choke of the Year</div>
-        </div>
-        <div class="award-item">
-          <span class="award-label">📖 Best Story</span>
-          <div class="award-name">Best Story Winner</div>
-          <div class="award-stat">Also: Rookie of the Year — UNANIMOUS</div>
-        </div>
-        <div class="award-item">
-          <span class="award-label">🌟 Rookie of the Year</span>
-          <div class="award-name">Rookie of the Year</div>
-          <div class="award-stat">UNANIMOUS AGREEMENT</div>
-        </div>
-        <div class="award-item" style="border-left:3px solid var(--red)">
-          <span class="award-label" style="color:var(--red2)">🗑️ Mr. Trash</span>
-          <div class="award-name" style="color:var(--red2)">Mr. Trash Winner</div>
-          <div class="award-stat">UNANIMOUS AGREEMENT</div>
-        </div>
-      </div>
-    </div>
-
-    <!-- PLAYOFFS -->
-    <div id="s4-playoffs" class="tab-content">
-      <div class="playoff-block">
-        <div class="playoff-title">FIRST ROUND</div>
-        <div class="game-row">
-          <span class="game-seed">#1</span>
-          <span class="game-team">Tampa Bay Buccaneers</span>
-          <span class="game-score win">64</span><span class="separator">—</span><span class="game-score">62</span>
-          <span class="game-team">Dallas Cowboys</span>
-          <span class="game-seed">#8</span>
-        </div>
-        <div class="game-row">
-          <span class="game-seed">#2</span>
-          <span class="game-team">Philadelphia Eagles</span>
-          <span class="game-score win">72</span><span class="separator">—</span><span class="game-score">70</span>
-          <span class="game-team">New York Giants</span>
-          <span class="game-seed">#7</span>
-        </div>
-        <div class="game-row">
-          <span class="game-seed">#3</span>
-          <span class="game-team">Kansas City Chiefs</span>
-          <span class="game-score">54</span><span class="separator">—</span><span class="game-score win">64</span>
-          <span class="game-team">San Francisco 49ers</span>
-          <span class="game-seed">#6</span>
-        </div>
-        <div class="game-row">
-          <span class="game-seed">#4</span>
-          <span class="game-team">Carolina Panthers</span>
-          <span class="game-score win">64</span><span class="separator">—</span><span class="game-score">54</span>
-          <span class="game-team">Denver Broncos</span>
-          <span class="game-seed">#5</span>
-        </div>
-      </div>
-      <div class="playoff-block">
-        <div class="playoff-title">SECOND ROUND</div>
-        <div class="game-row">
-          <span class="game-seed">#1</span>
-          <span class="game-team">Tampa Bay Buccaneers</span>
-          <span class="game-score win">88</span><span class="separator">—</span><span class="game-score">72</span>
-          <span class="game-team">San Francisco 49ers</span>
-          <span class="game-seed">#6</span>
-        </div>
-        <div class="game-row">
-          <span class="game-seed">#4</span>
-          <span class="game-team">Carolina Panthers</span>
-          <span class="game-score win">70</span><span class="separator">—</span><span class="game-score">64</span>
-          <span class="game-team">Philadelphia Eagles</span>
-          <span class="game-seed">#2</span>
-        </div>
-      </div>
-      <div class="playoff-block">
-        <div class="playoff-title">SUPER BOWL</div>
-        <div class="final-game game-row">
-          <span class="game-team">🏆 Carolina Panthers</span>
-          <span class="game-score win">80</span><span class="separator">—</span><span class="game-score">72</span>
-          <span class="game-team">Tampa Bay Buccaneers</span>
-        </div>
-        <div style="font-size:.8rem;font-style:italic;color:var(--dim);margin-top:8px">Carolina Panthers are Season 4 Super Bowl Champions!</div>
-      </div>
-    </div>
-
-    <!-- ALL PRO -->
-    <div id="s4-allpro" class="tab-content">
-      <div style="padding:12px 20px 4px;font-family:'Bebas Neue',sans-serif;font-size:.7rem;letter-spacing:.3em;color:var(--dim)">SEASON 4 ALL-PRO TEAM</div>
-      <div class="allpro-grid">
-        <div class="allpro-item">
-          <div class="allpro-pos">QB 1</div>
-          <div class="allpro-info"><div class="allpro-name">Tom Brady</div><div class="allpro-team">Tampa Bay Buccaneers</div></div>
-        </div>
-        <div class="allpro-item">
-          <div class="allpro-pos">QB 2</div>
-          <div class="allpro-info"><div class="allpro-name">Mr. Apple</div><div class="allpro-team">Philadelphia Eagles</div></div>
-        </div>
-        <div class="allpro-item">
-          <div class="allpro-pos">WR 1</div>
-          <div class="allpro-info"><div class="allpro-name">Ryan Flournoy</div><div class="allpro-team">Dallas Cowboys</div></div>
-        </div>
-        <div class="allpro-item">
-          <div class="allpro-pos">WR 2</div>
-          <div class="allpro-info"><div class="allpro-name">Rodney Leno Jr.</div><div class="allpro-team">Tampa Bay Buccaneers</div></div>
-        </div>
-        <div class="allpro-item">
-          <div class="allpro-pos">WR 3</div>
-          <div class="allpro-info"><div class="allpro-name">Horace Acho</div><div class="allpro-team">Houston Texans</div></div>
-        </div>
-        <div class="allpro-item">
-          <div class="allpro-pos">WR 4</div>
-          <div class="allpro-info"><div class="allpro-name">Nyheim Anenih</div><div class="allpro-team">New Orleans Saints</div></div>
-        </div>
-        <div class="allpro-item">
-          <div class="allpro-pos">TE</div>
-          <div class="allpro-info"><div class="allpro-name">Jabrill Becker</div><div class="allpro-team">Tampa Bay Buccaneers</div></div>
-        </div>
-        <div class="allpro-item">
-          <div class="allpro-pos">DL 1</div>
-          <div class="allpro-info"><div class="allpro-name">Rashee Pappoe</div><div class="allpro-team">Tampa Bay Buccaneers</div></div>
-        </div>
-        <div class="allpro-item">
-          <div class="allpro-pos">DL 2</div>
-          <div class="allpro-info"><div class="allpro-name">Nick Bosa</div><div class="allpro-team">San Francisco 49ers</div></div>
-        </div>
-        <div class="allpro-item">
-          <div class="allpro-pos">DL 3</div>
-          <div class="allpro-info"><div class="allpro-name">Koda Ogbah</div><div class="allpro-team">Houston Texans</div></div>
-        </div>
-        <div class="allpro-item">
-          <div class="allpro-pos">LB 1</div>
-          <div class="allpro-info"><div class="allpro-name">Brian Burns</div><div class="allpro-team">New York Giants</div></div>
-        </div>
-        <div class="allpro-item">
-          <div class="allpro-pos">LB 2</div>
-          <div class="allpro-info"><div class="allpro-name">Bobby Weeks</div><div class="allpro-team">Denver Broncos</div></div>
-        </div>
-        <div class="allpro-item">
-          <div class="allpro-pos">DB 1</div>
-          <div class="allpro-info"><div class="allpro-name">Jerick Tauaefa</div><div class="allpro-team">Houston Texans</div></div>
-        </div>
-        <div class="allpro-item">
-          <div class="allpro-pos">DB 2</div>
-          <div class="allpro-info"><div class="allpro-name">Mr. Gonzalez</div><div class="allpro-team">New England Patriots</div></div>
-        </div>
-        <div class="allpro-item">
-          <div class="allpro-pos">DB 3</div>
-          <div class="allpro-info"><div class="allpro-name">Jaylen Dalman</div><div class="allpro-team">New Orleans Saints</div></div>
-        </div>
-        <div class="allpro-item">
-          <div class="allpro-pos">DB 4</div>
-          <div class="allpro-info"><div class="allpro-name">Tanzel Skule</div><div class="allpro-team">Dallas Cowboys</div></div>
-        </div>
-      </div>
+      <div class="award-item"><span class="award-label">🏈 QB MVP</span><div class="award-name">Marquis Pratt</div><div class="award-stat">Denver Broncos • 6,833 YDS • 109 TD • 0 INT • 65% CMP — UNANIMOUS</div></div>
+      <div class="award-item"><span class="award-label">🎯 WR MVP</span><div class="award-name">Ryan Flournoy</div><div class="award-stat">Dallas Cowboys • 4,555 YDS • 74 TD • 0 FUM — UNANIMOUS</div></div>
+      <div class="award-item"><span class="award-label">🛡️ Defensive POY</span><div class="award-name">Brian Burns (LB)</div><div class="award-stat">New York Giants • 102 TCK • 4 INT • 4 SCK • 1 FF</div></div>
+      <div class="award-item"><span class="award-label">👑 INT King</span><div class="award-name">Jerick Tauaefa</div><div class="award-stat">Houston Texans • 7 INT • 1 FF</div></div>
+      <div class="award-item"><span class="award-label">🎙️ COTY</span><div class="award-name">COTY Winner</div><div class="award-stat">UNANIMOUS</div></div>
+      <div class="award-item"><span class="award-label">⚡ Mr. Clutch</span><div class="award-name">Mr. Clutch Winner</div><div class="award-stat">—</div></div>
+      <div class="award-item"><span class="award-label">📖 Best Story + 🌟 ROTY</span><div class="award-name">Rookie Winner</div><div class="award-stat">UNANIMOUS</div></div>
+      <div class="award-item" style="border-left:3px solid var(--red)"><span class="award-label" style="color:var(--red2)">🗑️ Mr. Trash</span><div class="award-name" style="color:var(--red2)">Mr. Trash Winner</div><div class="award-stat">UNANIMOUS</div></div>
     </div>
   </div>
-</div>
+  <div id="s4-playoffs" class="tab-content">
+    <div class="playoff-block"><div class="playoff-title">FIRST ROUND</div>
+      <div class="game-row"><span class="game-seed">#1</span><span class="game-team">Tampa Bay</span><span class="game-score win">64</span><span class="sep">—</span><span class="game-score">62</span><span class="game-team">Dallas Cowboys</span><span class="game-seed">#8</span></div>
+      <div class="game-row"><span class="game-seed">#2</span><span class="game-team">Philadelphia Eagles</span><span class="game-score win">72</span><span class="sep">—</span><span class="game-score">70</span><span class="game-team">New York Giants</span><span class="game-seed">#7</span></div>
+      <div class="game-row"><span class="game-seed">#3</span><span class="game-team">Kansas City Chiefs</span><span class="game-score">54</span><span class="sep">—</span><span class="game-score win">64</span><span class="game-team">San Francisco 49ers</span><span class="game-seed">#6</span></div>
+      <div class="game-row"><span class="game-seed">#4</span><span class="game-team">Carolina Panthers</span><span class="game-score win">64</span><span class="sep">—</span><span class="game-score">54</span><span class="game-team">Denver Broncos</span><span class="game-seed">#5</span></div>
+    </div>
+    <div class="playoff-block"><div class="playoff-title">SECOND ROUND</div>
+      <div class="game-row"><span class="game-seed">#1</span><span class="game-team">Tampa Bay</span><span class="game-score win">88</span><span class="sep">—</span><span class="game-score">72</span><span class="game-team">San Francisco 49ers</span><span class="game-seed">#6</span></div>
+      <div class="game-row"><span class="game-seed">#4</span><span class="game-team">Carolina Panthers</span><span class="game-score win">70</span><span class="sep">—</span><span class="game-score">64</span><span class="game-team">Philadelphia Eagles</span><span class="game-seed">#2</span></div>
+    </div>
+    <div class="playoff-block"><div class="playoff-title">SUPER BOWL IV</div>
+      <div class="final-game game-row"><span class="game-team">🏆 Carolina Panthers</span><span class="game-score win">80</span><span class="sep">—</span><span class="game-score">72</span><span class="game-team">Tampa Bay Buccaneers</span></div>
+    </div>
+  </div>
+  <div id="s4-allpro" class="tab-content">
+    <div style="padding:12px 20px 4px;font-family:'Bebas Neue',sans-serif;font-size:.7rem;letter-spacing:.3em;color:var(--dim)">SEASON 4 ALL-PRO TEAM</div>
+    <div class="allpro-grid">
+      <div class="allpro-item"><div class="allpro-pos">QB 1</div><div><div class="allpro-name">Tom Brady</div><div class="allpro-team">Tampa Bay Buccaneers</div></div></div>
+      <div class="allpro-item"><div class="allpro-pos">QB 2</div><div><div class="allpro-name">Mr. Apple</div><div class="allpro-team">Philadelphia Eagles</div></div></div>
+      <div class="allpro-item"><div class="allpro-pos">WR 1</div><div><div class="allpro-name">Ryan Flournoy</div><div class="allpro-team">Dallas Cowboys</div></div></div>
+      <div class="allpro-item"><div class="allpro-pos">WR 2</div><div><div class="allpro-name">Rodney Leno Jr.</div><div class="allpro-team">Tampa Bay Buccaneers</div></div></div>
+      <div class="allpro-item"><div class="allpro-pos">WR 3</div><div><div class="allpro-name">Horace Acho</div><div class="allpro-team">Houston Texans</div></div></div>
+      <div class="allpro-item"><div class="allpro-pos">WR 4</div><div><div class="allpro-name">Nyheim Anenih</div><div class="allpro-team">New Orleans Saints</div></div></div>
+      <div class="allpro-item"><div class="allpro-pos">TE</div><div><div class="allpro-name">Jabrill Becker</div><div class="allpro-team">Tampa Bay Buccaneers</div></div></div>
+      <div class="allpro-item"><div class="allpro-pos">DL 1</div><div><div class="allpro-name">Rashee Pappoe</div><div class="allpro-team">Tampa Bay</div></div></div>
+      <div class="allpro-item"><div class="allpro-pos">DL 2</div><div><div class="allpro-name">Nick Bosa</div><div class="allpro-team">San Francisco 49ers</div></div></div>
+      <div class="allpro-item"><div class="allpro-pos">DL 3</div><div><div class="allpro-name">Koda Ogbah</div><div class="allpro-team">Houston Texans</div></div></div>
+      <div class="allpro-item"><div class="allpro-pos">LB 1</div><div><div class="allpro-name">Brian Burns</div><div class="allpro-team">New York Giants</div></div></div>
+      <div class="allpro-item"><div class="allpro-pos">LB 2</div><div><div class="allpro-name">Bobby Weeks</div><div class="allpro-team">Denver Broncos</div></div></div>
+      <div class="allpro-item"><div class="allpro-pos">DB 1</div><div><div class="allpro-name">Jerick Tauaefa</div><div class="allpro-team">Houston Texans</div></div></div>
+      <div class="allpro-item"><div class="allpro-pos">DB 2</div><div><div class="allpro-name">Mr. Gonzalez</div><div class="allpro-team">New England Patriots</div></div></div>
+      <div class="allpro-item"><div class="allpro-pos">DB 3</div><div><div class="allpro-name">Jaylen Dalman</div><div class="allpro-team">New Orleans Saints</div></div></div>
+      <div class="allpro-item"><div class="allpro-pos">DB 4</div><div><div class="allpro-name">Tanzel Skule</div><div class="allpro-team">Dallas Cowboys</div></div></div>
+    </div>
+  </div>
+</div></div>
 
-<!-- ═══════════════ SEASON 5 ═══════════════ -->
 <div style="max-width:760px;margin:0 auto;padding:16px 16px 0" id="s5">
-  <div class="season-card">
-    <div class="season-header">
-      <div class="season-num">S5</div>
-      <div class="season-eyebrow">3RDY'S RETRO BOWL LEAGUE</div>
-      <div class="season-title">SEASON 5</div>
-      <div class="season-champ">🏆 Philadelphia Eagles — Super Bowl Champions</div>
+<div class="season-card">
+  <div class="season-header">
+    <div class="season-num">S5</div>
+    <div class="season-eyebrow">3RDY'S RETRO BOWL LEAGUE</div>
+    <div class="season-title">SEASON 5</div>
+    <div class="season-champ">🏆 Philadelphia Eagles — Super Bowl Champions</div>
+  </div>
+  <div class="season-img-wrap" id="wrap-s5-banner">
+    <div class="season-img-placeholder" onclick="openModal('s5','banner')">
+      <div class="ph-icon">🖼️</div><div class="ph-text">CLICK TO ADD SEASON 5 BANNER IMAGE</div>
     </div>
-
-    <div class="tab-row">
-      <button class="tab-btn active" onclick="showTab('s5','standings')">Standings</button>
-      <button class="tab-btn" onclick="showTab('s5','awards')">Awards</button>
-      <button class="tab-btn" onclick="showTab('s5','playoffs')">Playoffs</button>
-    </div>
-
-    <!-- STANDINGS -->
-    <div id="s5-standings" class="tab-content active">
-      <div class="conf-block">
-        <div class="conf-label moon"><span class="conf-icon">🌙</span> MOON CONFERENCE</div>
-        <table class="standings">
-          <thead><tr><th>Team</th><th>Record</th><th>Conf</th><th>PF</th><th></th></tr></thead>
-          <tbody>
-            <tr><td><div class="team-dot clr-phi"></div><span>Philadelphia Eagles</span> <span class="record-badge champ">CHAMP</span></td><td class="record">12-3</td><td>3-0</td><td>1118</td><td style="text-align:right"><span class="record-badge">X</span></td></tr>
-            <tr><td><div class="team-dot clr-hou"></div><span>Houston Texans</span></td><td class="record">12-3</td><td>3-0</td><td>1034</td><td style="text-align:right"><span class="record-badge">X</span></td></tr>
-            <tr><td><div class="team-dot clr-nyj"></div><span>New York Jets</span></td><td class="record">9-6</td><td>5-3</td><td>886</td><td></td></tr>
-            <tr><td><div class="team-dot clr-det"></div><span>Detroit Lions</span></td><td class="record">7-8</td><td>3-1</td><td>856</td><td></td></tr>
-            <tr><td><div class="team-dot clr-nyg"></div><span>New York Giants</span></td><td class="record">7-8</td><td>1-2</td><td>704</td><td></td></tr>
-            <tr><td><div class="team-dot" style="background:#4B92DB"></div><span>Tennessee Titans</span></td><td class="record">4-11</td><td>1-2</td><td>702</td><td style="text-align:right;color:var(--red2)">E</td></tr>
-            <tr class="afk-row"><td><div class="team-dot clr-pit"></div><span>Pittsburgh Steelers</span></td><td class="record">—</td><td>—</td><td>—</td><td style="text-align:right;color:var(--dimmer)">AFK</td></tr>
-            <tr class="afk-row"><td><div class="team-dot clr-ne"></div><span>New England Patriots</span></td><td class="record">—</td><td>—</td><td>—</td><td style="text-align:right;color:var(--dimmer)">AFK</td></tr>
-            <tr class="afk-row"><td><div class="team-dot clr-lar"></div><span>Los Angeles Rams</span></td><td class="record">—</td><td>—</td><td>—</td><td style="text-align:right;color:var(--dimmer)">AFK</td></tr>
-          </tbody>
-        </table>
+    <div class="season-img-overlay"></div>
+    <div class="season-img-caption">SEASON 5</div>
+    <button class="season-img-edit" onclick="openModal('s5','banner')">✏️ EDIT</button>
+  </div>
+  <div class="tab-row" id="tabs-s5">
+    <button class="tab-btn active" onclick="showTab('s5','standings',this)"><div class="tab-thumb-ph" id="th-s5-standings">📊</div><div class="tab-label">Standings</div></button>
+    <button class="tab-btn" onclick="showTab('s5','awards',this)"><div class="tab-thumb-ph" id="th-s5-awards">🏆</div><div class="tab-label">Awards</div></button>
+    <button class="tab-btn" onclick="showTab('s5','playoffs',this)"><div class="tab-thumb-ph" id="th-s5-playoffs">🏟️</div><div class="tab-label">Playoffs</div></button>
+    <button class="tab-btn tab-add-btn" onclick="openModal('s5','tabs')"><div class="tab-thumb-ph">➕</div><div class="tab-label" style="font-size:.58rem">TAB IMGS</div></button>
+  </div>
+  <div id="s5-standings" class="tab-content active">
+    <div class="conf-block"><div class="conf-label moon">🌙 MOON CONFERENCE</div>
+    <table class="standings"><thead><tr><th>Team</th><th>W-L</th><th>Conf</th><th>PF</th><th></th></tr></thead><tbody>
+      <tr><td><span class="tdot phi"></span>Philadelphia Eagles <span class="record-badge champ">CHAMP</span></td><td class="record">12-3</td><td>3-0</td><td>1118</td><td style="text-align:right"><span class="record-badge">X</span></td></tr>
+      <tr><td><span class="tdot hou"></span>Houston Texans</td><td class="record">12-3</td><td>3-0</td><td>1034</td><td style="text-align:right"><span class="record-badge">X</span></td></tr>
+      <tr><td><span class="tdot nyj"></span>New York Jets</td><td class="record">9-6</td><td>5-3</td><td>886</td><td></td></tr>
+      <tr><td><span class="tdot det"></span>Detroit Lions</td><td class="record">7-8</td><td>3-1</td><td>856</td><td></td></tr>
+      <tr><td><span class="tdot nyg"></span>New York Giants</td><td class="record">7-8</td><td>1-2</td><td>704</td><td></td></tr>
+      <tr><td><span class="tdot ten"></span>Tennessee Titans</td><td class="record">4-11</td><td>1-2</td><td>702</td><td style="text-align:right;color:var(--red2)">E</td></tr>
+      <tr class="afk-row"><td><span class="tdot pit"></span>Pittsburgh Steelers</td><td>—</td><td>—</td><td>—</td><td style="text-align:right;color:var(--dimmer)">AFK</td></tr>
+      <tr class="afk-row"><td><span class="tdot ne"></span>New England Patriots</td><td>—</td><td>—</td><td>—</td><td style="text-align:right;color:var(--dimmer)">AFK</td></tr>
+      <tr class="afk-row"><td><span class="tdot lar"></span>Los Angeles Rams</td><td>—</td><td>—</td><td>—</td><td style="text-align:right;color:var(--dimmer)">AFK</td></tr>
+    </tbody></table></div>
+    <div class="conf-block"><div class="conf-label sun">☀️ SUN CONFERENCE</div>
+    <table class="standings"><thead><tr><th>Team</th><th>W-L</th><th>Conf</th><th>PF</th><th></th></tr></thead><tbody>
+      <tr><td><span class="tdot kc"></span>Kansas City Chiefs</td><td class="record">12-3</td><td>2-1</td><td>1000</td><td style="text-align:right"><span class="record-badge">X</span></td></tr>
+      <tr><td><span class="tdot nos"></span>New Orleans Saints</td><td class="record">11-4</td><td>3-4</td><td>1056</td><td></td></tr>
+      <tr><td><span class="tdot sf"></span>San Francisco 49ers</td><td class="record">11-4</td><td>2-4</td><td>1040</td><td></td></tr>
+      <tr><td><span class="tdot den"></span>Denver Broncos</td><td class="record">9-5-1</td><td>3-1-1</td><td>916</td><td></td></tr>
+      <tr><td><span class="tdot jax"></span>Jacksonville Jaguars</td><td class="record">9-6</td><td>4-4</td><td>887</td><td></td></tr>
+      <tr><td><span class="tdot cin"></span>Cincinnati Bengals</td><td class="record">8-6-1</td><td>4-2-1</td><td>887</td><td></td></tr>
+      <tr><td><span class="tdot tb"></span>Tampa Bay Buccaneers</td><td class="record">9-6</td><td>6-2</td><td>852</td><td></td></tr>
+      <tr class="afk-row"><td><span class="tdot chi"></span>Chicago Bears</td><td>—</td><td>—</td><td>—</td><td style="text-align:right;color:var(--dimmer)">AFK</td></tr>
+      <tr class="afk-row"><td><span class="tdot atl"></span>Atlanta Falcons</td><td>—</td><td>—</td><td>—</td><td style="text-align:right;color:var(--dimmer)">AFK</td></tr>
+    </tbody></table></div>
+  </div>
+  <div id="s5-awards" class="tab-content">
+    <div class="awards-grid">
+      <div class="award-item full" style="background:linear-gradient(135deg,rgba(245,197,24,.06) 0%,var(--panel2) 100%);border:1px solid var(--gold)">
+        <span class="award-label" style="color:var(--gold2)">🌍 Game of the Year</span>
+        <div class="award-name">Houston Texans vs Cincinnati Bengals</div>
+        <div class="award-stat">Thursday Night Football | HOU 80 – 72 CIN</div>
       </div>
-      <div class="conf-block">
-        <div class="conf-label sun"><span class="conf-icon">☀️</span> SUN CONFERENCE</div>
-        <table class="standings">
-          <thead><tr><th>Team</th><th>Record</th><th>Conf</th><th>PF</th><th></th></tr></thead>
-          <tbody>
-            <tr><td><div class="team-dot clr-kc"></div><span>Kansas City Chiefs</span></td><td class="record">12-3</td><td>2-1</td><td>1000</td><td style="text-align:right"><span class="record-badge">X</span></td></tr>
-            <tr><td><div class="team-dot clr-nos"></div><span>New Orleans Saints</span></td><td class="record">11-4</td><td>3-4</td><td>1056</td><td></td></tr>
-            <tr><td><div class="team-dot clr-sf"></div><span>San Francisco 49ers</span></td><td class="record">11-4</td><td>2-4</td><td>1040</td><td></td></tr>
-            <tr><td><div class="team-dot clr-den"></div><span>Denver Broncos</span></td><td class="record">9-5-1</td><td>3-1-1</td><td>916</td><td></td></tr>
-            <tr><td><div class="team-dot clr-jax"></div><span>Jacksonville Jaguars</span></td><td class="record">9-6</td><td>4-4</td><td>887</td><td></td></tr>
-            <tr><td><div class="team-dot clr-cin"></div><span>Cincinnati Bengals</span></td><td class="record">8-6-1</td><td>4-2-1</td><td>887</td><td></td></tr>
-            <tr><td><div class="team-dot clr-tb"></div><span>Tampa Bay Buccaneers</span></td><td class="record">9-6</td><td>6-2</td><td>852</td><td></td></tr>
-            <tr class="afk-row"><td><div class="team-dot clr-chi"></div><span>Chicago Bears</span></td><td class="record">—</td><td>—</td><td>—</td><td style="text-align:right;color:var(--dimmer)">AFK</td></tr>
-            <tr class="afk-row"><td><div class="team-dot clr-atl"></div><span>Atlanta Falcons</span></td><td class="record">—</td><td>—</td><td>—</td><td style="text-align:right;color:var(--dimmer)">AFK</td></tr>
-          </tbody>
-        </table>
-        <div style="margin-top:8px;font-size:.75rem;font-style:italic;color:var(--dim)">X = Playoff qualified &nbsp;|&nbsp; E = Eliminated &nbsp;|&nbsp; AFK = Absent from play</div>
-      </div>
-    </div>
-
-    <!-- AWARDS -->
-    <div id="s5-awards" class="tab-content">
-      <div class="awards-grid">
-        <div class="award-item full" style="background:linear-gradient(135deg,rgba(245,197,24,.06) 0%,var(--panel2) 100%);border:1px solid var(--gold)">
-          <span class="award-label" style="color:var(--gold2)">🌍 Game of the Year</span>
-          <div class="award-name">Houston Texans vs Cincinnati Bengals</div>
-          <div class="award-stat">Thursday Night Football &nbsp;|&nbsp; HOU 80 – 72 CIN</div>
-        </div>
-        <div class="award-item">
-          <span class="award-label">🏈 QB MVP</span>
-          <div class="award-name">Mr. Apple</div>
-          <div class="award-stat">Philadelphia Eagles • 8,426 YDS • 140 TD • 1 INT (227/202)</div>
-        </div>
-        <div class="award-item">
-          <span class="award-label">🎯 WR MVP</span>
-          <div class="award-name">Rodney Leno Jr.</div>
-          <div class="award-stat">Tampa Bay Buccaneers • 7,722 YDS • 120 TD • 0 FUM</div>
-        </div>
-        <div class="award-item">
-          <span class="award-label">🏟️ TE MVP</span>
-          <div class="award-name">Laroy Silvera</div>
-          <div class="award-stat">Jacksonville Jaguars • 734 YDS • 12 TD</div>
-        </div>
-        <div class="award-item">
-          <span class="award-label">🛡️ Defensive POY</span>
-          <div class="award-name">McCray (LB)</div>
-          <div class="award-stat">Philadelphia Eagles • 120 TCK • 6 INT • 3 SCK • 5 FF</div>
-        </div>
-        <div class="award-item">
-          <span class="award-label">👑 INT King</span>
-          <div class="award-name">Koch</div>
-          <div class="award-stat">Cincinnati Bengals • 6 INT • 0 FF</div>
-        </div>
-        <div class="award-item">
-          <span class="award-label">🎙️ Coach of the Year</span>
-          <div class="award-name">COTY Winner</div>
-          <div class="award-stat">—</div>
-        </div>
-        <div class="award-item">
-          <span class="award-label">⚡ Mr. Clutch</span>
-          <div class="award-name">Mr. Clutch Winner</div>
-          <div class="award-stat">—</div>
-        </div>
-        <div class="award-item" style="border-left:3px solid var(--red)">
-          <span class="award-label" style="color:var(--red2)">🤦 Choke of the Year</span>
-          <div class="award-name" style="color:var(--red2)">Choke of Year Winner</div>
-          <div class="award-stat">—</div>
-        </div>
-        <div class="award-item" style="border-left:3px solid var(--red)">
-          <span class="award-label" style="color:var(--red2)">🗑️ Mr. Trash</span>
-          <div class="award-name" style="color:var(--red2)">Mr. Trash Winner</div>
-          <div class="award-stat">Also: Rookie of the Year (Only Rookie)</div>
-        </div>
-        <div class="award-item">
-          <span class="award-label">📖 Best Story</span>
-          <div class="award-name">Best Story Winner</div>
-          <div class="award-stat">—</div>
-        </div>
-        <div class="award-item">
-          <span class="award-label">🌟 Rookie of the Year</span>
-          <div class="award-name">Mr. Trash Winner</div>
-          <div class="award-stat">Only Rookie — UNANIMOUS</div>
-        </div>
-      </div>
-    </div>
-
-    <!-- PLAYOFFS -->
-    <div id="s5-playoffs" class="tab-content">
-      <div class="playoff-block">
-        <div class="playoff-title">FIRST ROUND</div>
-        <div class="game-row">
-          <span class="game-seed">#1</span>
-          <span class="game-team">Kansas City Chiefs</span>
-          <span class="game-score win">72</span><span class="separator">—</span><span class="game-score">56</span>
-          <span class="game-team">New York Jets</span>
-          <span class="game-seed">#8</span>
-        </div>
-        <div class="game-row">
-          <span class="game-seed">#2</span>
-          <span class="game-team">Philadelphia Eagles</span>
-          <span class="game-score win">94</span><span class="separator">—</span><span class="game-score">60</span>
-          <span class="game-team">Tampa Bay Buccaneers</span>
-          <span class="game-seed">#7</span>
-        </div>
-        <div class="game-row">
-          <span class="game-seed">#3</span>
-          <span class="game-team">Houston Texans</span>
-          <span class="game-score">54</span><span class="separator">—</span><span class="game-score win">64</span>
-          <span class="game-team">Denver Broncos</span>
-          <span class="game-seed">#6</span>
-        </div>
-        <div class="game-row">
-          <span class="game-seed">#4</span>
-          <span class="game-team">San Francisco 49ers</span>
-          <span class="game-score">64</span><span class="separator">—</span><span class="game-score">64</span>
-          <span class="game-team">New Orleans Saints</span>
-          <span class="game-seed">#5</span>
-          <span style="font-size:.75rem;color:var(--gold);font-style:italic">(SF win on PD)</span>
-        </div>
-      </div>
-      <div class="playoff-block">
-        <div class="playoff-title">SECOND ROUND</div>
-        <div class="game-row">
-          <span class="game-seed">#1</span>
-          <span class="game-team">Kansas City Chiefs</span>
-          <span class="game-score win">78</span><span class="separator">—</span><span class="game-score">60</span>
-          <span class="game-team">Denver Broncos</span>
-          <span class="game-seed">#6</span>
-        </div>
-        <div class="game-row">
-          <span class="game-seed">#2</span>
-          <span class="game-team">Philadelphia Eagles</span>
-          <span class="game-score win">72</span><span class="separator">—</span><span class="game-score">70</span>
-          <span class="game-team">New Orleans Saints</span>
-          <span class="game-seed">#5</span>
-        </div>
-      </div>
-      <div class="playoff-block">
-        <div class="playoff-title">SUPER BOWL V</div>
-        <div class="final-game game-row">
-          <span class="game-team">🏆 Philadelphia Eagles</span>
-          <span class="game-score win">67</span><span class="separator">—</span><span class="game-score">64</span>
-          <span class="game-team">Kansas City Chiefs</span>
-        </div>
-        <div style="font-size:.8rem;font-style:italic;color:var(--dim);margin-top:8px">Philadelphia Eagles are Season 5 Super Bowl Champions! 3-point nail-biter!</div>
-      </div>
+      <div class="award-item"><span class="award-label">🏈 QB MVP</span><div class="award-name">Mr. Apple</div><div class="award-stat">Philadelphia Eagles • 8,426 YDS • 140 TD • 1 INT (227/202)</div></div>
+      <div class="award-item"><span class="award-label">🎯 WR MVP</span><div class="award-name">Rodney Leno Jr.</div><div class="award-stat">Tampa Bay • 7,722 YDS • 120 TD • 0 FUM</div></div>
+      <div class="award-item"><span class="award-label">🏟️ TE MVP</span><div class="award-name">Laroy Silvera</div><div class="award-stat">Jacksonville Jaguars • 734 YDS • 12 TD</div></div>
+      <div class="award-item"><span class="award-label">🛡️ Defensive POY</span><div class="award-name">McCray (LB)</div><div class="award-stat">Philadelphia Eagles • 120 TCK • 6 INT • 3 SCK • 5 FF</div></div>
+      <div class="award-item"><span class="award-label">👑 INT King</span><div class="award-name">Koch</div><div class="award-stat">Cincinnati Bengals • 6 INT • 0 FF</div></div>
+      <div class="award-item"><span class="award-label">🎙️ COTY</span><div class="award-name">COTY Winner</div><div class="award-stat">—</div></div>
+      <div class="award-item"><span class="award-label">⚡ Mr. Clutch</span><div class="award-name">Mr. Clutch Winner</div><div class="award-stat">—</div></div>
+      <div class="award-item"><span class="award-label">📖 Best Story</span><div class="award-name">Best Story Winner</div><div class="award-stat">—</div></div>
+      <div class="award-item"><span class="award-label">🌟 Rookie of Year</span><div class="award-name">Mr. Trash Winner</div><div class="award-stat">Only Rookie — UNANIMOUS</div></div>
+      <div class="award-item" style="border-left:3px solid var(--red)"><span class="award-label" style="color:var(--red2)">🤦 Choke of Year</span><div class="award-name" style="color:var(--red2)">Choke Winner</div><div class="award-stat">—</div></div>
+      <div class="award-item" style="border-left:3px solid var(--red)"><span class="award-label" style="color:var(--red2)">🗑️ Mr. Trash</span><div class="award-name" style="color:var(--red2)">Mr. Trash Winner</div><div class="award-stat">Also Rookie of Year</div></div>
     </div>
   </div>
-</div>
+  <div id="s5-playoffs" class="tab-content">
+    <div class="playoff-block"><div class="playoff-title">FIRST ROUND</div>
+      <div class="game-row"><span class="game-seed">#1</span><span class="game-team">Kansas City Chiefs</span><span class="game-score win">72</span><span class="sep">—</span><span class="game-score">56</span><span class="game-team">New York Jets</span><span class="game-seed">#8</span></div>
+      <div class="game-row"><span class="game-seed">#2</span><span class="game-team">Philadelphia Eagles</span><span class="game-score win">94</span><span class="sep">—</span><span class="game-score">60</span><span class="game-team">Tampa Bay</span><span class="game-seed">#7</span></div>
+      <div class="game-row"><span class="game-seed">#3</span><span class="game-team">Houston Texans</span><span class="game-score">54</span><span class="sep">—</span><span class="game-score win">64</span><span class="game-team">Denver Broncos</span><span class="game-seed">#6</span></div>
+      <div class="game-row"><span class="game-seed">#4</span><span class="game-team">San Francisco 49ers</span><span class="game-score">64</span><span class="sep">—</span><span class="game-score">64</span><span class="game-team">New Orleans Saints</span><span class="game-seed">#5</span><span style="font-size:.73rem;color:var(--gold);font-style:italic">(SF win on PD)</span></div>
+    </div>
+    <div class="playoff-block"><div class="playoff-title">SECOND ROUND</div>
+      <div class="game-row"><span class="game-seed">#1</span><span class="game-team">Kansas City Chiefs</span><span class="game-score win">78</span><span class="sep">—</span><span class="game-score">60</span><span class="game-team">Denver Broncos</span><span class="game-seed">#6</span></div>
+      <div class="game-row"><span class="game-seed">#2</span><span class="game-team">Philadelphia Eagles</span><span class="game-score win">72</span><span class="sep">—</span><span class="game-score">70</span><span class="game-team">New Orleans Saints</span><span class="game-seed">#5</span></div>
+    </div>
+    <div class="playoff-block"><div class="playoff-title">SUPER BOWL V</div>
+      <div class="final-game game-row"><span class="game-team">🏆 Philadelphia Eagles</span><span class="game-score win">67</span><span class="sep">—</span><span class="game-score">64</span><span class="game-team">Kansas City Chiefs</span></div>
+      <div style="font-size:.8rem;font-style:italic;color:var(--dim);margin-top:8px">3-point nail-biter!</div>
+    </div>
+  </div>
+</div></div>
 
-<!-- ═══════════════ CHAMPIONS BANNER ═══════════════ -->
+<!-- CHAMPIONS ROLL -->
 <div style="max-width:760px;margin:16px auto 0;padding:0 16px">
   <div style="background:linear-gradient(135deg,var(--navy) 0%,#030D1A 100%);border:2px solid var(--gold);padding:20px">
     <div style="font-family:'Bebas Neue',sans-serif;font-size:.75rem;letter-spacing:.35em;color:var(--gold);margin-bottom:14px;text-align:center">🏆 BRBL SUPER BOWL CHAMPIONS ROLL</div>
     <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px">
-      <div style="text-align:center;padding:12px;background:rgba(255,255,255,.03);border:1px solid var(--border)">
-        <div style="font-family:'Bebas Neue',sans-serif;font-size:.65rem;letter-spacing:.2em;color:var(--dim)">SEASON 1</div>
-        <div style="font-family:'Bebas Neue',sans-serif;font-size:1rem;color:var(--gold);margin:4px 0">Philadelphia Eagles</div>
-        <div style="font-size:.75rem;color:var(--dim)">PHI 80 – 54 TB</div>
-      </div>
-      <div style="text-align:center;padding:12px;background:rgba(255,255,255,.03);border:1px solid var(--border)">
-        <div style="font-family:'Bebas Neue',sans-serif;font-size:.65rem;letter-spacing:.2em;color:var(--dim)">SEASON 2</div>
-        <div style="font-family:'Bebas Neue',sans-serif;font-size:1rem;color:var(--gold);margin:4px 0">Dallas Cowboys</div>
-        <div style="font-size:.75rem;color:var(--dim)">DAL 87 – 70 NOS</div>
-      </div>
-      <div style="text-align:center;padding:12px;background:rgba(255,255,255,.03);border:1px solid var(--border)">
-        <div style="font-family:'Bebas Neue',sans-serif;font-size:.65rem;letter-spacing:.2em;color:var(--dim)">SEASON 3</div>
-        <div style="font-family:'Bebas Neue',sans-serif;font-size:1rem;color:var(--gold);margin:4px 0">San Francisco 49ers</div>
-        <div style="font-size:.75rem;color:var(--dim)">SF 64 – 60 TB</div>
-      </div>
-      <div style="text-align:center;padding:12px;background:rgba(255,255,255,.03);border:1px solid var(--border)">
-        <div style="font-family:'Bebas Neue',sans-serif;font-size:.65rem;letter-spacing:.2em;color:var(--dim)">SEASON 4</div>
-        <div style="font-family:'Bebas Neue',sans-serif;font-size:1rem;color:var(--gold);margin:4px 0">Carolina Panthers</div>
-        <div style="font-size:.75rem;color:var(--dim)">CAR 80 – 72 TB</div>
-      </div>
-      <div style="text-align:center;padding:12px;background:rgba(255,255,255,.03);border:1px solid var(--border)">
-        <div style="font-family:'Bebas Neue',sans-serif;font-size:.65rem;letter-spacing:.2em;color:var(--dim)">SEASON 5</div>
-        <div style="font-family:'Bebas Neue',sans-serif;font-size:1rem;color:var(--gold);margin:4px 0">Philadelphia Eagles</div>
-        <div style="font-size:.75rem;color:var(--dim)">PHI 67 – 64 KC</div>
-      </div>
-      <div style="text-align:center;padding:12px;background:rgba(245,197,24,.05);border:2px dashed var(--border)">
-        <div style="font-family:'Bebas Neue',sans-serif;font-size:.65rem;letter-spacing:.2em;color:var(--dim)">SEASON 6</div>
-        <div style="font-family:'Bebas Neue',sans-serif;font-size:1rem;color:var(--dimmer);margin:4px 0">??? — Buenos Aires</div>
-        <div style="font-size:.75rem;color:var(--dimmer)">🇦🇷 To be decided</div>
-      </div>
+      <div style="text-align:center;padding:12px;background:rgba(255,255,255,.03);border:1px solid var(--border)"><div style="font-family:'Bebas Neue',sans-serif;font-size:.65rem;letter-spacing:.2em;color:var(--dim)">SEASON 1</div><div style="font-family:'Bebas Neue',sans-serif;font-size:1rem;color:var(--gold);margin:4px 0">Philadelphia Eagles</div><div style="font-size:.75rem;color:var(--dim)">PHI 80 – 54 TB</div></div>
+      <div style="text-align:center;padding:12px;background:rgba(255,255,255,.03);border:1px solid var(--border)"><div style="font-family:'Bebas Neue',sans-serif;font-size:.65rem;letter-spacing:.2em;color:var(--dim)">SEASON 2</div><div style="font-family:'Bebas Neue',sans-serif;font-size:1rem;color:var(--gold);margin:4px 0">Dallas Cowboys</div><div style="font-size:.75rem;color:var(--dim)">DAL 87 – 70 NOS</div></div>
+      <div style="text-align:center;padding:12px;background:rgba(255,255,255,.03);border:1px solid var(--border)"><div style="font-family:'Bebas Neue',sans-serif;font-size:.65rem;letter-spacing:.2em;color:var(--dim)">SEASON 3</div><div style="font-family:'Bebas Neue',sans-serif;font-size:1rem;color:var(--gold);margin:4px 0">San Francisco 49ers</div><div style="font-size:.75rem;color:var(--dim)">SF 64 – 60 TB</div></div>
+      <div style="text-align:center;padding:12px;background:rgba(255,255,255,.03);border:1px solid var(--border)"><div style="font-family:'Bebas Neue',sans-serif;font-size:.65rem;letter-spacing:.2em;color:var(--dim)">SEASON 4</div><div style="font-family:'Bebas Neue',sans-serif;font-size:1rem;color:var(--gold);margin:4px 0">Carolina Panthers</div><div style="font-size:.75rem;color:var(--dim)">CAR 80 – 72 TB</div></div>
+      <div style="text-align:center;padding:12px;background:rgba(255,255,255,.03);border:1px solid var(--border)"><div style="font-family:'Bebas Neue',sans-serif;font-size:.65rem;letter-spacing:.2em;color:var(--dim)">SEASON 5</div><div style="font-family:'Bebas Neue',sans-serif;font-size:1rem;color:var(--gold);margin:4px 0">Philadelphia Eagles</div><div style="font-size:.75rem;color:var(--dim)">PHI 67 – 64 KC</div></div>
+      <div style="text-align:center;padding:12px;background:rgba(245,197,24,.05);border:2px dashed var(--border)"><div style="font-family:'Bebas Neue',sans-serif;font-size:.65rem;letter-spacing:.2em;color:var(--dim)">SEASON 6</div><div style="font-family:'Bebas Neue',sans-serif;font-size:1rem;color:var(--dimmer);margin:4px 0">??? — Buenos Aires</div><div style="font-size:.75rem;color:var(--dimmer)">🇦🇷 To be decided</div></div>
     </div>
   </div>
 </div>
 
-<!-- ═══════════════ SETTINGS ═══════════════ -->
+<!-- SETTINGS -->
 <div style="max-width:760px;margin:0 auto;padding:40px 16px 0" id="settings">
   <div class="section-title">⚙️ LEAGUE SETTINGS</div>
-  <div class="card" style="margin-bottom:12px">
-    <div class="card-title">🎮 Regular Season</div>
+  <div class="card" style="margin-bottom:12px"><div class="card-title">🎮 Regular Season</div>
     <div class="settings-grid">
       <div class="stat-box"><span class="slabel">Start Year</span><div class="sval">Year 2 (Roster Optional)</div></div>
       <div class="stat-box"><span class="slabel">Restarts</span><div class="sval">3</div></div>
@@ -1164,38 +665,33 @@ footer{text-align:center;padding:20px;border-top:1px solid var(--border);font-si
       <div class="stat-box"><span class="slabel">Difficulty</span><div class="sval">Medium</div></div>
     </div>
   </div>
-  <div class="card red-left">
-    <div class="card-title red">🏆 Playoffs</div>
+  <div class="card red-left"><div class="card-title red">🏆 Playoffs</div>
     <div class="settings-grid" style="margin-bottom:12px">
       <div class="stat-box"><span class="slabel">Format</span><div class="sval">CFB-Style (No Byes)</div></div>
       <div class="stat-box"><span class="slabel">Restarts</span><div class="sval">1 Only</div></div>
       <div class="stat-box"><span class="slabel">Quarter Length</span><div class="sval">3 Minutes</div></div>
       <div class="stat-box"><span class="slabel">Difficulty</span><div class="sval">Hard</div></div>
     </div>
+    <ul class="rule-list"><li><span class="ico">⚡</span><div><strong>Upsets ARE possible.</strong> <span class="hl">No one is safe.</span></div></li></ul>
+  </div>
+  <div class="card" style="margin-bottom:12px"><div class="card-title">📰 Media Rules</div>
     <ul class="rule-list">
-      <li><span class="ico">⚡</span><div><strong>Upsets ARE possible.</strong> <span class="hl">No one is safe.</span></div></li>
+      <li><span class="ico">🩺</span><div><strong>Injuries MUST be announced</strong> publicly.</div></li>
+      <li><span class="ico">🚓</span><div><strong>Player illegal activity MUST be reported.</strong></div></li>
+      <li><span class="ico">📡</span><div><strong>Media narratives matter.</strong> The media covers YOU.</div></li>
     </ul>
   </div>
-  <div class="card" style="margin-bottom:12px">
-    <div class="card-title">📰 Media Rules</div>
-    <ul class="rule-list">
-      <li><span class="ico">🩺</span><div><strong>Injuries MUST be announced</strong> publicly. No hiding your roster.</div></li>
-      <li><span class="ico">🚓</span><div><strong>Player involvement in illegal activity MUST be reported.</strong> This is a media league.</div></li>
-      <li><span class="ico">📡</span><div><strong>Media narratives matter.</strong> The media will cover YOU — good or bad.</div></li>
-    </ul>
-  </div>
-  <div class="card grass-left">
-    <div class="card-title">📋 Coaching Rules</div>
+  <div class="card grass-left"><div class="card-title">📋 Coaching Rules</div>
     <ul class="rule-list">
       <li><span class="ico">📈</span><div><strong>Coaches build legacies</strong> — or become cautionary tales.</div></li>
       <li><span class="ico">🔥</span><div><strong>2 bad seasons in a row</strong> → eligible to be <span class="hl">fired by the 3rdy Committee.</span></div></li>
-      <li><span class="ico">💼</span><div><strong>Fired coaches MAY find another job</strong> — but your reputation follows you everywhere.</div></li>
+      <li><span class="ico">💼</span><div><strong>Fired coaches MAY find another job</strong> — your reputation follows you.</div></li>
       <li><span class="ico">🎨</span><div><strong>Custom media coverage & graphics</strong> every other week.</div></li>
     </ul>
   </div>
 </div>
 
-<!-- ═══════════════ HOF ═══════════════ -->
+<!-- HOF -->
 <div style="max-width:760px;margin:0 auto;padding:16px 16px 0" id="hof">
   <div class="hof-section">
     <div class="hof-title">🏛️ HALL OF FAME REQUIREMENTS</div>
@@ -1205,43 +701,178 @@ footer{text-align:center;padding:20px;border-top:1px solid var(--border);font-si
       <div class="hof-req">2 SB Berths<small>Get to the game</small></div>
       <div class="hof-req">1 SB Win<small>Close the deal</small></div>
     </div>
-    <p style="font-size:.78rem;font-style:italic;color:var(--dim)">Requirements may increase as the league grows. Get in early and build your legacy.</p>
+    <p style="font-size:.78rem;font-style:italic;color:var(--dim)">Requirements may increase as the league grows. Get in early.</p>
   </div>
 </div>
 
-<!-- ═══════════════ CTA ═══════════════ -->
+<!-- CTA -->
 <div style="max-width:760px;margin:0 auto;padding:16px 16px 40px" id="join">
   <div class="cta-block">
     <div class="cta-h">Your Coaching Career Starts Now</div>
-    <div class="cta-sub">S4 wrapped legendary. S5 filled fast. S6 ends in Argentina 🇦🇷. Where will YOU be?</div>
+    <div class="cta-sub">S5 was legendary. S6 ends in Argentina 🇦🇷. Where will YOU be?</div>
     <a class="cta-btn" href="https://discord.gg/w8ta9JWNKh" target="_blank">JOIN THE LEAGUE →</a>
     <span class="cta-discord">discord.gg/w8ta9JWNKh</span>
   </div>
 </div>
-
 <footer>© 3RBL — 3rdy's Retro Bowl League · New Era · Season 6 &nbsp;|&nbsp; ❤️ Loving Community, No Heavy Negativity</footer>
 
 <script>
-function showTab(season, tab) {
-  document.querySelectorAll(`[id^="${season}-"]`).forEach(el => el.classList.remove('active'));
+// ── TABS ──
+function showTab(season, tab, btn) {
+  document.querySelectorAll('[id^="'+season+'-"]').forEach(el => el.classList.remove('active'));
   const card = document.getElementById(season);
-  card.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
-  document.getElementById(`${season}-${tab}`).classList.add('active');
-  event.target.classList.add('active');
+  if(card) card.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  const el = document.getElementById(season+'-'+tab);
+  if(el) el.classList.add('active');
+  if(btn) btn.classList.add('active');
 }
 
-const sections = document.querySelectorAll('[id]');
+// ── MODAL ──
+let mTarget = null; // e.g. {season:'s1', type:'banner'}
+let mPendingUrl = null;
+
+function openModal(season, type) {
+  mTarget = {season, type};
+  const labels = {banner:'Season '+season.toUpperCase()+' Banner Image', tabs:'Tab Thumbnails for Season '+season.toUpperCase()};
+  document.getElementById('modalTitle').textContent = 'ADD IMAGE — ' + (labels[type] || type.toUpperCase());
+  document.getElementById('imgUrl').value = '';
+  document.getElementById('imgPrev').src = '';
+  document.getElementById('imgPrev').classList.remove('show');
+  mPendingUrl = null;
+
+  // For tab images show which-tab selector
+  const wr = document.getElementById('whichRow');
+  if(type === 'tabs') {
+    const tabs = ['standings','awards','playoffs','allpro'];
+    wr.style.display = 'flex';
+    wr.innerHTML = '<div style="font-family:Bebas Neue,sans-serif;font-size:.6rem;letter-spacing:.2em;color:var(--dim);margin-bottom:4px;width:100%">APPLY TO:</div>' +
+      tabs.map(t => `<button class="img-which-btn sel" data-tab="${t}" onclick="toggleTab(this)">${t.toUpperCase()}</button>`).join('');
+  } else {
+    wr.style.display = 'none';
+  }
+
+  document.getElementById('imgModal').classList.add('open');
+}
+
+function toggleTab(btn) { btn.classList.toggle('sel'); }
+
+function closeModal() {
+  document.getElementById('imgModal').classList.remove('open');
+  mTarget = null; mPendingUrl = null;
+}
+document.getElementById('imgModal').addEventListener('click', e => { if(e.target.id==='imgModal') closeModal(); });
+
+function previewUrl() {
+  const url = document.getElementById('imgUrl').value.trim();
+  const prev = document.getElementById('imgPrev');
+  if(url) { prev.src = url; prev.classList.add('show'); mPendingUrl = url; }
+  else { prev.classList.remove('show'); mPendingUrl = null; }
+}
+function handleFile(input) {
+  const file = input.files[0]; if(!file) return;
+  const reader = new FileReader();
+  reader.onload = e => {
+    const url = e.target.result;
+    document.getElementById('imgUrl').value = '';
+    const prev = document.getElementById('imgPrev');
+    prev.src = url; prev.classList.add('show'); mPendingUrl = url;
+  };
+  reader.readAsDataURL(file);
+}
+
+function applyImg() {
+  const url = document.getElementById('imgUrl').value.trim() || mPendingUrl;
+  if(!url || !mTarget) { alert('Please add an image URL or upload a file first.'); return; }
+  const {season, type} = mTarget;
+
+  if(type === 'banner') {
+    setBannerImg(season, url);
+  } else if(type === 'tabs') {
+    // get selected tabs
+    const sel = [...document.querySelectorAll('.img-which-btn.sel')].map(b => b.dataset.tab);
+    sel.forEach(tab => setTabThumb(season, tab, url));
+  }
+  saveStorage();
+  closeModal();
+}
+
+function clearImg() {
+  if(!mTarget) return;
+  const {season, type} = mTarget;
+  if(type === 'banner') clearBannerImg(season);
+  saveStorage();
+  closeModal();
+}
+
+function setBannerImg(season, url) {
+  const wrap = document.getElementById('wrap-'+season+'-banner');
+  if(!wrap) return;
+  let img = wrap.querySelector('img.s-hero-img');
+  if(!img) { img = document.createElement('img'); img.className = 's-hero-img'; wrap.insertBefore(img, wrap.firstChild); }
+  img.src = url;
+  const ph = wrap.querySelector('.season-img-placeholder');
+  if(ph) ph.style.display = 'none';
+}
+function clearBannerImg(season) {
+  const wrap = document.getElementById('wrap-'+season+'-banner');
+  if(!wrap) return;
+  const img = wrap.querySelector('img.s-hero-img');
+  if(img) img.remove();
+  const ph = wrap.querySelector('.season-img-placeholder');
+  if(ph) ph.style.display = '';
+}
+function setTabThumb(season, tab, url) {
+  const thId = 'th-'+season+'-'+tab;
+  const el = document.getElementById(thId);
+  if(!el) return;
+  const parent = el.parentElement;
+  // Replace placeholder div with img
+  const img = document.createElement('img');
+  img.className = 'tab-thumb';
+  img.src = url;
+  img.id = thId; // keep the id
+  parent.replaceChild(img, el);
+}
+
+// ── STORAGE ──
+function saveStorage() {
+  try {
+    const data = {};
+    ['s1','s2','s3','s4','s5'].forEach(s => {
+      const wrap = document.getElementById('wrap-'+s+'-banner');
+      const img = wrap && wrap.querySelector('img.s-hero-img');
+      data[s+'_banner'] = img ? img.src : null;
+      ['standings','awards','playoffs','allpro'].forEach(tab => {
+        const th = document.getElementById('th-'+s+'-'+tab);
+        data[s+'_tab_'+tab] = th && th.tagName === 'IMG' ? th.src : null;
+      });
+    });
+    localStorage.setItem('brbl_imgs', JSON.stringify(data));
+  } catch(e) {}
+}
+function loadStorage() {
+  try {
+    const raw = localStorage.getItem('brbl_imgs');
+    if(!raw) return;
+    const data = JSON.parse(raw);
+    ['s1','s2','s3','s4','s5'].forEach(s => {
+      if(data[s+'_banner']) setBannerImg(s, data[s+'_banner']);
+      ['standings','awards','playoffs','allpro'].forEach(tab => {
+        if(data[s+'_tab_'+tab]) setTabThumb(s, tab, data[s+'_tab_'+tab]);
+      });
+    });
+  } catch(e) {}
+}
+
+// ── NAV SCROLL ──
 const navLinks = document.querySelectorAll('.nav-links a');
 window.addEventListener('scroll', () => {
-  let current = '';
-  sections.forEach(s => {
-    if (window.scrollY >= s.offsetTop - 120) current = s.id;
-  });
-  navLinks.forEach(a => {
-    a.classList.remove('active');
-    if (a.getAttribute('href') === '#' + current) a.classList.add('active');
-  });
+  let cur = '';
+  document.querySelectorAll('[id]').forEach(s => { if(window.scrollY >= s.offsetTop - 120) cur = s.id; });
+  navLinks.forEach(a => { a.classList.remove('active'); if(a.getAttribute('href')==='#'+cur) a.classList.add('active'); });
 });
+
+loadStorage();
 </script>
 </body>
 </html>
