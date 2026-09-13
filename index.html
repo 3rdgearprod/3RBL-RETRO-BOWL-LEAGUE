@@ -220,7 +220,7 @@ footer{text-align:center;padding:20px;border-top:1px solid var(--border);font-si
 
 <!-- NAV -->
 <nav>
-  <div class="nav-brand">BRBL</div>
+  <div class="nav-brand">3RBL</div>
   <div class="nav-links">
     <a href="#home" class="active">Home</a><a href="#history">History</a>
     <a href="#s1">S1</a><a href="#s2">S2</a><a href="#s3">S3</a><a href="#s4">S4</a><a href="#s5">S5</a><a href="#s6">S6</a>
@@ -235,7 +235,7 @@ footer{text-align:center;padding:20px;border-top:1px solid var(--border);font-si
     <div class="badge">📺 Realism-Driven</div>
     <div class="badge outline">S1 • S2 • S3 • S4 • S5 • S6 • S7 Complete</div>
   </div>
-  <div class="hero-eyebrow">BRBL Presents</div>
+  <div class="hero-eyebrow">3RBL Presents</div>
   <div class="hero-title">3RDY'S RETRO<br>BOWL LEAGUE<em>— NEW ERA —</em></div>
   <div class="hero-season-badge">⚡ SEASON 9 — COMPLETE ⚡</div>
   <div class="sb-banner">
@@ -941,7 +941,10 @@ footer{text-align:center;padding:20px;border-top:1px solid var(--border);font-si
   </div>
 
   <div class="season-img-wrap" id="wrap-s8-banner" style="height:240px">
-    <img class="s-hero-img" src="season8-bucs-banner.png" alt="Tampa Bay Buccaneers Season 8 championship banner">
+    <img class="s-hero-img"
+         src="gettyimages-2240631269.webp"
+         alt="Tampa Bay Buccaneers Season 8 championship banner"
+         onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
     <div class="season-img-placeholder" onclick="openModal('s8','banner')" style="display:none;background:linear-gradient(135deg,rgba(213,10,10,.3) 0%,rgba(0,0,0,.6) 100%)">
       <div class="ph-icon">&#127942;</div>
       <div class="ph-text">ADD BUCCANEERS SUPER BOWL VIII CHAMPIONSHIP BANNER</div>
@@ -1067,7 +1070,10 @@ footer{text-align:center;padding:20px;border-top:1px solid var(--border);font-si
   </div>
 
   <div class="season-img-wrap" id="wrap-s9-banner" style="height:240px">
-    <img class="s-hero-img" src="season9-eagles-banner.png" alt="Philadelphia Eagles Season 9 championship banner">
+    <img class="s-hero-img"
+         src="250209-eagles-celebration-lr-5355b4.webp"
+         alt="Philadelphia Eagles Season 9 championship banner"
+         onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
     <div class="season-img-placeholder" onclick="openModal('s9','banner')" style="display:none;background:linear-gradient(135deg,rgba(0,76,84,.3) 0%,rgba(0,0,0,.6) 100%)">
       <div class="ph-icon">&#127942;</div>
       <div class="ph-text">ADD EAGLES SUPER BOWL IX CHAMPIONSHIP BANNER</div>
@@ -1414,7 +1420,11 @@ function loadStorage() {
     if(!raw) return;
     const data = JSON.parse(raw);
     ['s1','s2','s3','s4','s5','s6','s7','s8','s9'].forEach(s => {
-      if(data[s+'_banner']) setBannerImg(s, data[s+'_banner']);
+      const savedBanner = data[s+'_banner'];
+      const legacyBrokenBanner =
+        (s === 's8' && savedBanner && savedBanner.includes('season8-bucs-banner.png')) ||
+        (s === 's9' && savedBanner && savedBanner.includes('season9-eagles-banner.png'));
+      if(savedBanner && !legacyBrokenBanner) setBannerImg(s, savedBanner);
       ['standings','awards','playoffs','allpro'].forEach(tab => {
         if(data[s+'_tab_'+tab]) setTabThumb(s, tab, data[s+'_tab_'+tab]);
       });
